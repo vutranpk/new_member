@@ -1,0 +1,4 @@
+id,name,legal_name,logo,background,ink,primary,accent,email_domain,footer,announce_vi,announce_en,active
+psc,Phúc Sinh Consumers,Phuc Sinh Consumer Corp.,assets/companies/psc/logo.png,assets/companies/psc/background.jpg,#103D54,#11A3DC,#EB1F36,kcoffee.vn,WWW.KCOFFEE.VN / K COFFEE APP,,,TRUE
+demo-a,[Mẫu] Công ty thử nghiệm A,Demo Company A,,assets/companies/psc/background.jpg,#1F3B2C,#2F8F5B,#D9822B,example.com,WWW.EXAMPLE.COM,,,TRUE
+demo-b,[Mẫu] Công ty thử nghiệm B,Demo Company B,,assets/companies/psc/background.jpg,#2A2342,#6A4FC2,#E0457B,example.com,WWW.EXAMPLE.COM,Phòng Nhân sự trân trọng thông báo cùng toàn thể Anh/Chị,The People Team is pleased to announce to all colleagues,TRUE

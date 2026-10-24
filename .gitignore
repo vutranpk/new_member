@@ -1,0 +1,15 @@
+# Dữ liệu cá nhân dùng để thử trên máy — KHÔNG đưa lên GitHub
+samples/
+
+# File gốc thiết kế & ảnh thô (nặng, không cần cho web)
+*.ai
+*.jfif
+/Back PS Consumer.jpg
+/welcome-01.svg
+
+# Hệ điều hành / editor / secrets
+token.html
+*.ps1
+Thumbs.db
+.DS_Store
+.vscode/

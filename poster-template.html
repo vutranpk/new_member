@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Poster A4 Template — Bản mẫu HTML/CSS</title>
+
+  <!-- Dùng chung 100% file CSS với Studio: sửa trong css/poster.css là cả 2 trang tự cập nhật! -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/poster.css">
+
+  <style>
+    /* Nền trang hiển thị bản mẫu */
+    body {
+      margin: 0;
+      padding: 40px 16px 60px;
+      background: #181A1B;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    /* Đổ bóng cho khung poster để dễ nhìn khi xem riêng */
+    .poster {
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Khung Poster A4 (794 × 1123 px @ 96 DPI) -->
+  <article class="poster" id="poster">
+    <!-- Ảnh nền A4 -->
+    <img class="poster__bg" src="assets/companies/psc/background.jpg" alt="Nền poster">
+
+    <!-- Vùng nội dung trên nền giấy kem -->
+    <div class="poster__content">
+
+      <!-- 1. Đầu trang: Logo, Tiêu đề, Vạch đỏ, Thông báo -->
+      <header class="poster__head">
+        <div class="poster__logo">
+          <img src="assets/companies/psc/logo.png" alt="Logo công ty">
+        </div>
+        <h1 class="poster__title">Giới thiệu nhân sự mới</h1>
+        <p class="poster__kicker">New Employee Announcement</p>
+        <span class="poster__rule" aria-hidden="true"></span>
+        <p class="poster__announce-vi">Phòng HCNS trân trọng thông báo<br>cùng toàn thể Anh/Chị CBNV</p>
+        <p class="poster__announce-en">The HR &amp; Administration Department Is Pleased To Announce To All Employees</p>
+      </header>
+
+      <!-- 2. Hero: Welcome + Tên & Chức vụ | Khung ảnh chân dung -->
+      <section class="poster__hero">
+        <div class="poster__intro">
+          <div class="poster__welcome">
+            <img src="assets/shared/welcome.svg" alt="Welcome">
+          </div>
+          <p class="poster__salute">Anh / Mr.</p>
+          <p class="poster__name">ĐOÀN MẠNH TÙNG</p>
+          <p class="poster__role-vi">Trưởng Bộ phận E-commerce</p>
+          <p class="poster__role-en">Head of E-commerce</p>
+        </div>
+
+        <figure class="poster__photo">
+          <!-- Đế viền xanh trang trí phía dưới -->
+          <span class="poster__photo-back" aria-hidden="true"></span>
+          <!-- Khung ảnh bo góc 24px -->
+          <div class="poster__photo-frame">
+            <img src="samples/photo.jpg" alt="Ảnh chân dung nhân viên">
+          </div>
+          <!-- Các ngôi sao đỏ trang trí -->
+          <svg class="poster__spark poster__spark--a" viewBox="191.6 7.6 21.9 21.3" aria-hidden="true"><path d="m206.86,14.07c-2.4-2.7-4.31-6.43-4.31-6.43,0,0-1.470,3.540-4.020,6.260-2.830,3.020-6.870,4.630-6.870,4.630,0,0,4.040,1.610,6.870,4.630,2.550,2.720,4.020,6.260,4.020,6.260,0,0,1.910-3.730,4.310-6.430,2.780-3.120,6.580-4.460,6.580-4.460,0,0-3.800-1.330-6.580-4.460Z"/></svg>
+          <svg class="poster__spark poster__spark--b" viewBox="191.6 7.6 21.9 21.3" aria-hidden="true"><path d="m206.86,14.07c-2.4-2.7-4.31-6.43-4.31-6.43,0,0-1.470,3.540-4.020,6.260-2.830,3.020-6.870,4.630-6.870,4.630,0,0,4.040,1.610,6.870,4.630,2.550,2.720,4.020,6.260,4.020,6.260,0,0,1.910-3.730,4.310-6.430,2.780-3.120,6.580-4.460,6.580-4.460,0,0-3.800-1.330-6.580-4.460Z"/></svg>
+          <svg class="poster__spark poster__spark--c" viewBox="191.6 7.6 21.9 21.3" aria-hidden="true"><path d="m206.86,14.07c-2.4-2.7-4.31-6.43-4.31-6.43,0,0-1.470,3.540-4.020,6.260-2.830,3.020-6.870,4.630-6.870,4.630,0,0,4.040,1.610,6.870,4.630,2.550,2.720,4.020,6.260,4.020,6.260,0,0,1.910-3.730,4.310-6.430,2.780-3.120,6.580-4.460,6.580-4.460,0,0-3.800-1.330-6.580-4.460Z"/></svg>
+        </figure>
+      </section>
+
+      <!-- 3. Khối thông tin 2 cột -->
+      <dl class="poster__facts">
+        <div class="fact">
+          <dt>Quản lý trực tiếp <em lang="en">/ Direct Manager</em></dt>
+          <dd>Tổng Giám đốc / President</dd>
+        </div>
+        <div class="fact">
+          <dt>Phòng ban <em lang="en">/ Department</em></dt>
+          <dd>E-commerce</dd>
+        </div>
+        <div class="fact">
+          <dt>Liên hệ <em lang="en">/ Contact</em></dt>
+          <dd>0946 841 376 (Ext: 788) / ecomm@kcoffee.vn</dd>
+        </div>
+        <div class="fact">
+          <dt>Ngày nhận việc <em lang="en">/ Start Date</em></dt>
+          <dd>14.09.2026</dd>
+        </div>
+      </dl>
+
+      <!-- 4. Lời chúc & Chân trang -->
+      <footer class="poster__foot">
+        <p class="poster__msg-vi">
+          Chào mừng anh gia nhập <strong>Phúc Sinh Consumer Corp.</strong> Chúc anh sớm hòa nhập, phát triển và gặt hái nhiều thành công trên cương vị mới!
+        </p>
+        <p class="poster__msg-en">
+          Welcome to Phúc Sinh Consumer Corp.! We wish him a smooth transition, continued growth, and great success in his new role.
+        </p>
+        <p class="poster__site">WWW.KCOFFEE.VN / K COFFEE APP</p>
+      </footer>
+
+    </div>
+  </article>
+
+</body>
+</html>

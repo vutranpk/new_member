@@ -1,0 +1,144 @@
+/* ==========================================================================
+   Poster A4 — dựng ở kích thước gốc 794 × 1123 px (A4 @ 96 DPI).
+   Khi xuất, html-to-image nhân pixelRatio ≈ 3.123 để ra 2480 × 3508 px.
+   Mọi màu lấy từ biến thương hiệu, không viết màu riêng cho từng công ty.
+   ========================================================================== */
+
+.poster {
+  --p-w: 794px;
+  --p-h: 1123px;
+  --p-muted: #5E6A70;
+  --p-line: color-mix(in srgb, var(--brand-ink) 16%, transparent);
+  --p-col-a: 1.12fr;
+  --p-col-b: .88fr;
+  --p-gap: 36px;
+
+  position: relative;
+  width: var(--p-w);
+  height: var(--p-h);
+  overflow: hidden;
+  background: #F6F4EF;
+  color: var(--brand-ink);
+  font-family: var(--font);
+  font-synthesis: none;
+  line-height: 1.35;
+  text-rendering: geometricPrecision;
+}
+.poster p { margin: 0; }
+
+.poster__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; user-select: none; }
+
+/* Vùng giấy trên nền: khoảng 84px lề trái/phải, 48px lề trên, 40px lề dưới */
+.poster__content {
+  position: absolute; left: 84px; right: 84px; top: 48px; bottom: 40px;
+  display: flex; flex-direction: column;
+  justify-content: space-evenly;
+}
+
+/* ---- Đầu trang ---- */
+.poster__head { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.poster__logo { height: 86px; display: grid; place-items: center; margin-bottom: 12px; }
+.poster__logo img { max-height: 86px; max-width: 210px; width: auto; height: auto; object-fit: contain; }
+.poster__logo-text {
+  font-family: var(--font-display); font-weight: 700; font-size: 34px; line-height: 1;
+  text-transform: uppercase; letter-spacing: .02em; color: var(--brand-ink); max-width: 480px;
+}
+.poster__title {
+  margin: 8px 0; font-family: var(--font); font-weight: 700; font-size: 28px; line-height: 1.15;
+  text-transform: uppercase; letter-spacing: .03em; color: var(--brand-ink);
+}
+.poster__kicker {
+  margin-top: 5px; font-weight: 600; font-style: italic; font-size: 13px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--brand-ink);
+}
+/* Dải guide 1 (36px): 16px trên + 3.5px vạch + 16px dưới */
+.poster__rule { display: block; width: 56px; height: 3.5px; margin: 16px auto 16px; background: var(--brand-accent); border-radius: 2px; }
+.poster__announce-vi { font-weight: 700; font-size: 15px; line-height: 1.5; letter-spacing: .04em; text-transform: uppercase; color: var(--brand-ink); max-width: 540px; }
+.poster__announce-en { margin-top: 4px; font-style: italic; font-size: 15px; line-height: 1.45; color: var(--p-muted); max-width: 560px; }
+
+/* ---- Hero: Welcome + tên | ảnh (Khoảng cách & tỉ lệ theo template người dùng chỉnh) ---- */
+.poster__hero {
+  display: grid; grid-template-columns: 300px 1fr; gap: 40px;
+  align-items: center; margin-top: 36px; padding-right: 20px;
+}
+.poster__intro { min-width: 0; }
+.poster__welcome { width: 300px; margin-left: -4px; margin-bottom: 4px; }
+.poster__welcome svg { display: block; width: 100%; height: auto; }
+.poster__salute { margin-top: 6px; font-weight: 600; font-size: 13.5px; letter-spacing: .03em; color: var(--p-muted); text-transform: none; padding-left: 20px; }
+.poster__name {
+  margin-top: 4px;
+  font-family: var(--font); font-weight: 700; font-size: 33px; line-height: 1.12;
+  text-transform: uppercase; letter-spacing: .01em; color: var(--brand-ink);
+  white-space: nowrap; overflow: visible;
+  padding-left: 20px;
+  max-width: 100%;
+}
+.poster__intro > * {
+  margin-bottom: 4px!important;
+}
+.poster__name.is-semi { font-family: var(--font-semi); }
+.poster__name.is-wrap { white-space: normal !important; text-wrap: balance; word-break: keep-all; }
+.poster__role-vi { margin-top: 8px; font-weight: 700; font-size: 15px; letter-spacing: .04em; text-transform: uppercase; color: var(--brand-ink); padding-left: 20px; }
+.poster__role-en { margin-top: 3px; font-style: italic; font-weight: 600; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--p-muted); padding-left: 20px; }
+
+/* Khung ảnh chân dung: Hình chữ nhật bo tròn mềm mại (border-radius: 24px)
+   Kèm đế viền xanh thương hiệu nổi bật phía dưới (accent plate) theo đúng bản thiết kế */
+.poster__photo {
+  position: relative; margin: 0;
+  width: 100%; max-width: 326px; height: 260px;
+  justify-self: end;
+}
+.poster__photo-back, .poster__photo-frame {
+  position: absolute; inset: 0;
+}
+.poster__photo-back {
+  background: var(--brand-primary);
+  border-radius: 26px;
+  transform: translate(0px, 12px);
+}
+.poster__photo-frame {
+  border-radius: 24px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--brand-ink) 8%, #EDEAE3);
+  touch-action: none;
+}
+.poster__photo-frame.has-photo { cursor: grab; }
+.poster__photo-frame.is-dragging { cursor: grabbing; }
+.poster__photo-frame img {
+  position: absolute; left: 50%; top: 50%;
+  max-width: none; user-select: none; -webkit-user-drag: none;
+  transform-origin: center center;
+  will-change: transform;
+}
+.poster__photo-empty {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  color: color-mix(in srgb, var(--brand-ink) 45%, transparent);
+  font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+}
+
+/* Các ngôi sao đỏ trang trí bên cạnh khung ảnh */
+.poster__spark { position: absolute; fill: var(--brand-accent); z-index: 2; pointer-events: none; }
+.poster__spark--a { width: 32px; left: -16px; top: 56%; }
+.poster__spark--b { width: 18px; left: -22px; top: 24%; }
+.poster__spark--c { width: 12px; left: 14px; top: 12%; }
+
+/* ---- Thông tin 2 cột (Cột 1 380px theo template) ---- */
+.poster__facts {
+  display: grid; grid-template-columns: 380px 1fr; column-gap: 24px; row-gap: 16px;padding-left: 20px;
+  margin: 36px 0 0; padding-top: 0; border-top: none;
+}
+.fact { min-width: 0; }
+.fact dt { font-weight: 500; font-style: italic; font-size: 12.5px; letter-spacing: .01em; color: var(--p-muted); }
+.fact dt em { font-weight: 400; font-style: italic; letter-spacing: .01em; text-transform: none; font-size: 12.5px; }
+.fact dd { margin: 4px 0 0; font-weight: 500; font-size: 15px; line-height: 1.35; color: var(--brand-ink); overflow-wrap: anywhere; }
+
+/* ---- Lời chúc + chân trang (Dải guide 5 & 6: 36px) ---- */
+.poster__foot { margin-top: 36px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.poster__msg-vi { font-size: 14px; line-height: 1.55; color: var(--brand-ink); max-width: 580px; text-wrap: balance; }
+.poster__msg-vi strong { font-weight: 700; color: var(--brand-ink); }
+.poster__msg-en { margin-top: 6px; font-style: italic; font-size: 12px; line-height: 1.5; color: var(--p-muted); max-width: 580px; text-wrap: balance; }
+.poster__site { margin-top: 36px!important; font-weight: 700; font-size: 13px; letter-spacing: .15em; text-transform: uppercase; color: var(--brand-ink); }
+
+/* ---- Ô chưa nhập: chỉ hiện ở bản xem trước, không có trong file xuất ---- */
+.is-placeholder { color: color-mix(in srgb, var(--brand-ink) 30%, transparent) !important; }
+.poster.is-exporting .preview-only { display: none !important; }

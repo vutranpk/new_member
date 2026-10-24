@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome Studio — Thông báo nhân sự mới</title>
+  <meta name="description" content="Tạo thông báo chào đón nhân sự mới theo bộ nhận diện từng công ty, xuất file A4.">
+  <link rel="preload" href="fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/barlow-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/poster.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-target">Bỏ qua tới nội dung chính</a>
+
+  <!-- ============ Màn 1: Chọn công ty ============ -->
+  <main id="gate" class="gate" aria-labelledby="gate-title">
+    <div class="gate__intro" id="main-target" tabindex="-1">
+      <p class="wordmark"><span class="wordmark__mark" aria-hidden="true"></span>Welcome Studio</p>
+
+      <h1 id="gate-title" class="gate__title">Chào đón<br>người mới<span class="gate__title-dot">.</span></h1>
+      <p class="gate__lede">Chọn công ty để mở mẫu thông báo nhân sự mới với đúng logo, nền và màu thương hiệu. Nhập thông tin, xem trước và tải file A4 để in hoặc gửi.</p>
+
+      <div class="search">
+        <label class="visually-hidden" for="company-search">Tìm công ty</label>
+        <i data-lucide="search" class="icon search__icon" aria-hidden="true"></i>
+        <input id="company-search" class="search__input" type="search" placeholder="Tìm theo tên công ty…" autocomplete="off" spellcheck="false">
+      </div>
+
+      <div class="list-head">
+        <span id="company-count" class="list-head__count">Đang tải danh sách…</span>
+        <span id="data-source" class="source-tag" hidden></span>
+      </div>
+
+      <ul id="company-list" class="company-list" aria-label="Danh sách công ty" aria-busy="true">
+        <li class="company-skeleton" aria-hidden="true"></li>
+        <li class="company-skeleton" aria-hidden="true"></li>
+        <li class="company-skeleton" aria-hidden="true"></li>
+      </ul>
+      <div id="gate-status" class="gate-status" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="gate__stage" aria-hidden="true">
+      <div class="mock-sheet" id="mock-sheet">
+        <span class="crop crop--tl"></span><span class="crop crop--tr"></span>
+        <span class="crop crop--bl"></span><span class="crop crop--br"></span>
+        <div class="mock-sheet__paper">
+          <div class="mock-sheet__scaler" id="mock-scaler">
+            <article class="poster poster--mock" id="mock-poster" aria-hidden="true">
+              <img class="poster__bg" id="mock-bg" alt="">
+              <div class="poster__content">
+                <header class="poster__head">
+                  <div class="poster__logo">
+                    <img id="mock-logo" alt="">
+                    <span id="mock-logo-text" class="poster__logo-text" hidden></span>
+                  </div>
+                  <h2 class="poster__title">Giới thiệu nhân sự mới</h2>
+                  <p class="poster__kicker" lang="en">New Employee Announcement</p>
+                  <span class="poster__rule" aria-hidden="true"></span>
+                  <p class="poster__announce-vi" id="mock-announce-vi">Phòng HCNS trân trọng thông báo<br>cùng toàn thể Anh/Chị CBNV</p>
+                  <p class="poster__announce-en" id="mock-announce-en" lang="en">The HR &amp; Administration Department Is Pleased To Announce To All Employees</p>
+                </header>
+
+                <section class="poster__hero">
+                  <div class="poster__intro">
+                    <div class="poster__welcome" id="mock-welcome"></div>
+                    <p class="poster__salute" id="mock-salute">Anh / Mr.</p>
+                    <p class="poster__name" id="mock-name-val"><span class="is-placeholder">Họ và tên</span></p>
+                    <p class="poster__role-vi" id="mock-role-vi"><span class="is-placeholder">Chức danh</span></p>
+                    <p class="poster__role-en" id="mock-role-en" lang="en"></p>
+                  </div>
+                  <figure class="poster__photo">
+                    <span class="poster__photo-back" aria-hidden="true"></span>
+                    <div class="poster__photo-frame">
+                      <div class="poster__photo-empty">
+                        <i data-lucide="user-round" class="icon icon--xl" aria-hidden="true"></i>
+                        <span>Ảnh chân dung</span>
+                      </div>
+                    </div>
+                    <svg class="poster__spark poster__spark--a" viewBox="191.6 7.6 21.9 21.3" aria-hidden="true"><path d="m206.86,14.07c-2.4-2.7-4.31-6.43-4.31-6.43,0,0-1.470,3.540-4.020,6.260-2.830,3.020-6.870,4.630-6.870,4.630,0,0,4.040,1.610,6.870,4.630,2.550,2.720,4.020,6.260,4.020,6.260,0,0,1.910-3.730,4.310-6.430,2.780-3.120,6.580-4.460,6.580-4.460,0,0-3.800-1.330-6.580-4.460Z"/></svg>
+                    <svg class="poster__spark poster__spark--b" viewBox="191.6 7.6 21.9 21.3" aria-hidden="true"><path d="m206.86,14.07c-2.4-2.7-4.31-6.43-4.31-6.43,0,0-1.470,3.540-4.020,6.260-2.830,3.020-6.870,4.630-6.870,4.630,0,0,4.040,1.610,6.870,4.630,2.550,2.720,4.020,6.260,4.020,6.260,0,0,1.910-3.730,4.310-6.430,2.780-3.120,6.580-4.460,6.580-4.460,0,0-3.800-1.330-6.580-4.460Z"/></svg>
+                    <svg class="poster__spark poster__spark--c" viewBox="191.6 7.6 21.9 21.3" aria-hidden="true"><path d="m206.86,14.07c-2.4-2.7-4.31-6.43-4.31-6.43,0,0-1.470,3.540-4.020,6.260-2.830,3.020-6.870,4.630-6.870,4.630,0,0,4.040,1.610,6.870,4.630,2.550,2.720,4.020,6.260,4.020,6.260,0,0,1.910-3.730,4.310-6.430,2.780-3.120,6.580-4.460,6.580-4.460,0,0-3.800-1.330-6.580-4.460Z"/></svg>
+                  </figure>
+                </section>
+
+                <dl class="poster__facts">
+                  <div class="fact"><dt>Quản lý trực tiếp <em lang="en">/ Direct Manager</em></dt><dd class="is-placeholder">Quản lý trực tiếp</dd></div>
+                  <div class="fact"><dt>Phòng ban <em lang="en">/ Department</em></dt><dd class="is-placeholder">Phòng ban</dd></div>
+                  <div class="fact"><dt>Liên hệ <em lang="en">/ Contact</em></dt><dd class="is-placeholder">Điện thoại / Email</dd></div>
+                  <div class="fact"><dt>Ngày nhận việc <em lang="en">/ Start Date</em></dt><dd class="is-placeholder">dd.mm.yyyy</dd></div>
+                </dl>
+
+                <footer class="poster__foot">
+                  <p class="poster__msg-vi" id="mock-msg-vi">
+                    Chào mừng nhân sự mới gia nhập <strong>Phúc Sinh Consumer Corp.</strong> Chúc anh/chị sớm hòa nhập, phát triển và gặt hái nhiều thành công trên cương vị mới!
+                  </p>
+                  <p class="poster__msg-en" id="mock-msg-en" lang="en">
+                    Welcome to Phúc Sinh Consumer Corp.! We wish you a smooth transition, continued growth, and great success in your new role.
+                  </p>
+                  <p class="poster__site" id="mock-site">WWW.KCOFFEE.VN / K COFFEE APP</p>
+                </footer>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+      <p class="stage-caption"><span id="mock-name">—</span><span class="stage-caption__sep">·</span>A4 210 × 297 mm</p>
+    </div>
+  </main>
+
+  <!-- ============ Màn 2: Studio ============ -->
+  <div id="studio" class="studio" hidden>
+    <header class="topbar">
+      <button type="button" class="btn btn--ghost-dark" id="back-to-gate">
+        <i data-lucide="arrow-left" class="icon" aria-hidden="true"></i><span>Đổi công ty</span>
+      </button>
+
+      <div class="topbar__company">
+        <span class="logo-chip logo-chip--s"><img id="tb-logo" alt=""><span id="tb-logo-text" class="logo-chip__text" hidden></span></span>
+        <div class="topbar__company-text">
+          <strong id="tb-name">—</strong>
+          <span id="tb-legal">—</span>
+        </div>
+      </div>
+
+      <div class="topbar__actions">
+        <div class="zoom" role="group" aria-label="Thu phóng bản xem trước">
+          <button type="button" class="zoom__btn" data-zoom="fit" aria-pressed="true">Vừa khung</button>
+          <button type="button" class="zoom__btn" data-zoom="1" aria-pressed="false">100%</button>
+        </div>
+        <button type="button" class="btn btn--ghost-dark" id="reset-form">
+          <i data-lucide="rotate-ccw" class="icon" aria-hidden="true"></i><span class="hide-narrow">Làm mới</span>
+        </button>
+        <button type="button" class="btn btn--secondary-dark" id="export-pdf" disabled>
+          <i data-lucide="file-text" class="icon" aria-hidden="true"></i><span>PDF</span>
+        </button>
+        <button type="button" class="btn btn--primary" id="export-png" disabled>
+          <i data-lucide="download" class="icon" aria-hidden="true"></i><span>Tải ảnh A4</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="studio__body">
+      <!-- ---------- Form ---------- -->
+      <form class="editor" id="editor" novalidate aria-label="Thông tin nhân sự mới">
+        <fieldset class="section">
+          <legend class="section__head"><span class="section__num">01</span><span class="section__title">Nhân sự</span></legend>
+
+          <div class="field">
+            <span class="field__label" id="salute-label">Danh xưng</span>
+            <div class="segmented" role="radiogroup" aria-labelledby="salute-label">
+              <label class="segmented__opt"><input type="radio" name="salutation" value="mr" checked><span>Anh / Mr.</span></label>
+              <label class="segmented__opt"><input type="radio" name="salutation" value="ms"><span>Chị / Ms.</span></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="f-name">Họ và tên <span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="f-name" name="name" type="text" maxlength="48" autocomplete="off" placeholder="Nguyễn Văn An" required aria-describedby="name-fit">
+            <p class="field__hint" id="name-fit" aria-live="polite">Tên 2–3 chữ nằm 1 dòng; từ 4 chữ tự chia 2 dòng cân đối.</p>
+          </div>
+
+          <div class="field">
+            <span class="field__label" id="photo-label">Ảnh chân dung</span>
+            <label class="dropzone" id="dropzone" for="f-photo">
+              <i data-lucide="image-plus" class="icon icon--l" aria-hidden="true"></i>
+              <span class="dropzone__main">Kéo thả ảnh vào đây hoặc <u>chọn file</u></span>
+              <span class="dropzone__sub">JPG, PNG · nên dùng ảnh dọc, mặt nhìn thẳng</span>
+            </label>
+            <input class="visually-hidden" id="f-photo" type="file" accept="image/*" aria-labelledby="photo-label">
+
+            <div class="photo-tools" id="photo-tools" hidden>
+              <div class="photo-tools__row">
+                <img class="photo-tools__thumb" id="photo-thumb" alt="">
+                <div class="photo-tools__meta">
+                  <span class="photo-tools__file" id="photo-file">—</span>
+                  <span class="field__hint">Kéo ảnh trên poster để căn khuôn mặt.</span>
+                </div>
+              </div>
+              <div class="photo-tools__row">
+                <label class="field__label field__label--inline" for="f-zoom">Phóng</label>
+                <input class="range" id="f-zoom" type="range" min="100" max="300" step="1" value="100">
+                <button type="button" class="btn btn--ghost btn--icon" id="photo-center" aria-label="Căn giữa ảnh"><i data-lucide="scan-face" class="icon" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn--ghost btn--icon" id="photo-replace" aria-label="Đổi ảnh khác"><i data-lucide="replace" class="icon" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn--ghost btn--icon btn--danger" id="photo-remove" aria-label="Xóa ảnh"><i data-lucide="trash-2" class="icon" aria-hidden="true"></i></button>
+              </div>
+            </div>
+            <p class="field__error" id="photo-error" hidden></p>
+          </div>
+        </fieldset>
+
+        <fieldset class="section">
+          <legend class="section__head"><span class="section__num">02</span><span class="section__title">Công việc</span></legend>
+
+          <div class="field">
+            <label class="field__label" for="f-title-vi">Chức danh tiếng Việt <span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="f-title-vi" name="titleVi" type="text" maxlength="60" placeholder="Trưởng phòng Marketing" required>
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-title-en">Chức danh tiếng Anh</label>
+            <input class="input" id="f-title-en" name="titleEn" type="text" maxlength="60" placeholder="Marketing Manager" lang="en">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label class="field__label" for="f-dept">Phòng ban <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="f-dept" name="dept" type="text" maxlength="40" placeholder="Marketing" required>
+            </div>
+            <div class="field">
+              <label class="field__label" for="f-start">Ngày nhận việc <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="f-start" name="start" type="date" required>
+            </div>
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-manager">Quản lý trực tiếp</label>
+            <input class="input" id="f-manager" name="manager" type="text" maxlength="60" placeholder="Tổng Giám đốc / President">
+          </div>
+        </fieldset>
+
+        <fieldset class="section">
+          <legend class="section__head"><span class="section__num">03</span><span class="section__title">Liên hệ</span></legend>
+          <div class="field-row field-row--phone">
+            <div class="field">
+              <label class="field__label" for="f-phone">Điện thoại</label>
+              <input class="input" id="f-phone" name="phone" type="tel" inputmode="tel" maxlength="16" placeholder="09xx xxx xxx">
+            </div>
+            <div class="field">
+              <label class="field__label" for="f-ext">Số nội bộ</label>
+              <input class="input" id="f-ext" name="ext" type="text" inputmode="numeric" maxlength="6" placeholder="123">
+            </div>
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-email">Email</label>
+            <input class="input" id="f-email" name="email" type="email" maxlength="60" autocomplete="off" spellcheck="false" placeholder="ten@congty.vn" aria-describedby="email-hint">
+            <p class="field__hint" id="email-hint">Gõ phần trước @, rời ô sẽ tự thêm tên miền công ty.</p>
+          </div>
+        </fieldset>
+
+        <fieldset class="section">
+          <legend class="section__head"><span class="section__num">04</span><span class="section__title">Lời chúc</span></legend>
+          <label class="check">
+            <input type="checkbox" id="f-auto-msg" checked>
+            <span>Dùng lời chúc mặc định <span class="check__sub">Tự đổi anh/chị, him/her theo danh xưng</span></span>
+          </label>
+          <div class="field">
+            <label class="field__label" for="f-msg-vi">Tiếng Việt</label>
+            <textarea class="input textarea" id="f-msg-vi" rows="3" maxlength="220" readonly></textarea>
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-msg-en">Tiếng Anh</label>
+            <textarea class="input textarea" id="f-msg-en" rows="3" maxlength="220" lang="en" readonly></textarea>
+          </div>
+        </fieldset>
+
+        <p class="editor__privacy">
+          <i data-lucide="shield-check" class="icon" aria-hidden="true"></i>
+          Thông tin và ảnh chỉ xử lý trong trình duyệt này, không gửi lên máy chủ.
+        </p>
+      </form>
+
+      <!-- ---------- Preview ---------- -->
+      <section class="canvas" aria-label="Xem trước poster A4">
+        <div class="canvas__viewport" id="viewport">
+          <div class="sheet-frame" id="sheet-frame">
+            <span class="crop crop--tl"></span><span class="crop crop--tr"></span>
+            <span class="crop crop--bl"></span><span class="crop crop--br"></span>
+            <div class="poster-box" id="poster-box">
+              <div class="poster-scale" id="poster-scale">
+
+                <article class="poster" id="poster" aria-label="Poster thông báo nhân sự mới">
+                  <img class="poster__bg" id="p-bg" alt="">
+                  <div class="poster__content">
+                    <header class="poster__head">
+                      <div class="poster__logo">
+                        <img id="p-logo" alt="">
+                        <span id="p-logo-text" class="poster__logo-text" hidden></span>
+                      </div>
+                      <h2 class="poster__title">Giới thiệu nhân sự mới</h2>
+                      <p class="poster__kicker" lang="en">New Employee Announcement</p>
+                      <span class="poster__rule" aria-hidden="true"></span>
+                      <p class="poster__announce-vi" id="p-announce-vi"></p>
+                      <p class="poster__announce-en" id="p-announce-en" lang="en"></p>
+                    </header>
+
+                    <section class="poster__hero">
+                      <div class="poster__intro">
+                        <div class="poster__welcome" id="p-welcome"></div>
+                        <p class="poster__salute" id="p-salute">Anh / Mr.</p>
+                        <p class="poster__name" id="p-name"></p>
+                        <p class="poster__role-vi" id="p-title-vi"></p>
+                        <p class="poster__role-en" id="p-title-en" lang="en"></p>
+                      </div>
+                      <figure class="poster__photo">
+                        <span class="poster__photo-back" aria-hidden="true"></span>
+                        <div class="poster__photo-frame" id="p-photo-frame">
+                          <img id="p-photo" alt="" hidden draggable="false">
+                          <div class="poster__photo-empty preview-only" id="p-photo-empty">
+                            <i data-lucide="user-round" class="icon icon--xl" aria-hidden="true"></i>
+                            <span>Ảnh chân dung</span>
+                          </div>
+                        </div>
+                        <svg class="poster__spark poster__spark--a" viewBox="191.6 7.6 21.9 21.3" aria-hidden="true"><path d="m206.86,14.07c-2.4-2.7-4.31-6.43-4.31-6.43,0,0-1.470,3.540-4.020,6.260-2.830,3.020-6.870,4.630-6.870,4.630,0,0,4.040,1.610,6.870,4.630,2.550,2.720,4.020,6.260,4.020,6.260,0,0,1.910-3.730,4.310-6.430,2.780-3.120,6.580-4.460,6.580-4.460,0,0-3.800-1.330-6.580-4.460Z"/></svg>
+                        <svg class="poster__spark poster__spark--b" viewBox="191.6 7.6 21.9 21.3" aria-hidden="true"><path d="m206.86,14.07c-2.4-2.7-4.31-6.43-4.31-6.43,0,0-1.470,3.540-4.020,6.260-2.830,3.020-6.870,4.630-6.870,4.630,0,0,4.040,1.610,6.870,4.630,2.550,2.720,4.020,6.260,4.020,6.260,0,0,1.910-3.730,4.310-6.430,2.780-3.120,6.580-4.460,6.580-4.460,0,0-3.800-1.330-6.580-4.460Z"/></svg>
+                        <svg class="poster__spark poster__spark--c" viewBox="191.6 7.6 21.9 21.3" aria-hidden="true"><path d="m206.86,14.07c-2.4-2.7-4.31-6.43-4.31-6.43,0,0-1.470,3.540-4.020,6.260-2.830,3.020-6.870,4.630-6.870,4.630,0,0,4.040,1.610,6.870,4.630,2.550,2.720,4.020,6.260,4.020,6.260,0,0,1.910-3.730,4.310-6.430,2.780-3.120,6.580-4.460,6.580-4.460,0,0-3.800-1.330-6.580-4.460Z"/></svg>
+                      </figure>
+                    </section>
+
+                    <dl class="poster__facts">
+                      <div class="fact"><dt>Quản lý trực tiếp <em lang="en">/ Direct Manager</em></dt><dd id="p-manager"></dd></div>
+                      <div class="fact"><dt>Phòng ban <em lang="en">/ Department</em></dt><dd id="p-dept"></dd></div>
+                      <div class="fact"><dt>Liên hệ <em lang="en">/ Contact</em></dt><dd id="p-contact"></dd></div>
+                      <div class="fact"><dt>Ngày nhận việc <em lang="en">/ Start Date</em></dt><dd id="p-start"></dd></div>
+                    </dl>
+
+                    <footer class="poster__foot">
+                      <p class="poster__msg-vi" id="p-msg-vi"></p>
+                      <p class="poster__msg-en" id="p-msg-en" lang="en"></p>
+                      <p class="poster__site" id="p-site"></p>
+                    </footer>
+                  </div>
+                </article>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="canvas__caption">A4 · 210 × 297 mm<span class="stage-caption__sep">·</span>Xuất 2480 × 3508 px (300 DPI)</p>
+      </section>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+    <i data-lucide="check-circle-2" class="icon toast__icon toast__icon--ok" aria-hidden="true"></i>
+    <i data-lucide="alert-circle" class="icon toast__icon toast__icon--err" aria-hidden="true"></i>
+    <span id="toast-text"></span>
+  </div>
+
+  <script src="vendor/lucide.min.js"></script>
+  <script src="vendor/papaparse.min.js"></script>
+  <script src="vendor/html-to-image.js"></script>
+  <script src="vendor/jspdf.umd.min.js"></script>
+  <script src="js/config.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

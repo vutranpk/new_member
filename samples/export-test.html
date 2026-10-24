@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><title>Export test</title>
+<link rel="stylesheet" href="/css/tokens.css">
+<style>body{margin:0;background:#222;color:#fff;font:14px sans-serif} iframe{position:absolute;left:-3000px;width:1440px;height:900px} #out{display:flex;gap:16px;padding:16px;align-items:flex-start} #out img{height:860px;box-shadow:0 0 0 1px #555} pre{white-space:pre-wrap}</style>
+<script src="/vendor/html-to-image.js"></script>
+<script src="/vendor/jspdf.umd.min.js"></script>
+<script src="/js/config.js"></script>
+</head><body>
+<iframe id="f" src="/index.html?c=psc&demo"></iframe>
+<div id="out"><img id="img" alt=""><pre id="log">running…</pre></div>
+<script type="module">
+const log = (m) => { document.getElementById('log').textContent += '\n' + m; };
+const f = document.getElementById('f');
+f.addEventListener('load', async () => {
+  await new Promise((r) => setTimeout(r, 2000));
+  try {
+    const mod = await import('/js/export.js');
+    const poster = f.contentWindow.document.getElementById('poster');
+    let url = null;
+    HTMLAnchorElement.prototype.click = function () { url = this.href; log('download: ' + this.download); };
+    const t0 = performance.now();
+    await mod.exportPoster(poster, 'jpg', 'test');
+    log('time: ' + Math.round(performance.now() - t0) + 'ms');
+    const img = document.getElementById('img');
+    img.onload = () => log('size: ' + img.naturalWidth + 'x' + img.naturalHeight + '\nbytes≈' + Math.round(url.length * 0.75 / 1024) + 'KB');
+    img.src = url;
+  } catch (e) { log('ERROR ' + (e && (e.stack || e.message || e))); }
+});
+</script></body></html>
