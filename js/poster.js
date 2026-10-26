@@ -1,5 +1,5 @@
 // Dựng poster từ dữ liệu form + công ty đang chọn.
-import { mixHex, ensureContrast, escapeHtml, formatDate, formatPhone } from './utils.js';
+import { mixHex, ensureContrast, escapeHtml, formatDate, formatPhone, formatHtmlBreaks } from './utils.js';
 
 const PAPER = '#F6F4EF';
 const $ = (id) => document.getElementById(id);
@@ -67,8 +67,9 @@ export function renderPoster(state, company) {
   const p = pronouns(state.salutation);
 
   const viAnnounce = company.announceVi || cfg.DEFAULT_ANNOUNCE_VI;
-  $('p-announce-vi').innerHTML = viAnnounce.includes('<br>') ? viAnnounce : escapeHtml(viAnnounce);
-  $('p-announce-en').textContent = company.announceEn || cfg.DEFAULT_ANNOUNCE_EN;
+  $('p-announce-vi').innerHTML = formatHtmlBreaks(viAnnounce);
+  const enAnnounce = company.announceEn || cfg.DEFAULT_ANNOUNCE_EN;
+  $('p-announce-en').innerHTML = formatHtmlBreaks(enAnnounce);
   $('p-salute').innerHTML = state.salutation ? escapeHtml(p.salute) : ph('Danh xưng');
 
   $('p-name').innerHTML = state.name ? escapeHtml(state.name) : ph('Họ và tên');
@@ -94,7 +95,7 @@ export function renderPoster(state, company) {
   const rawEn = msg.en || '';
   $('p-msg-en').innerHTML = rawEn.includes('<br>') ? rawEn : escapeHtml(rawEn);
 
-  $('p-site').textContent = company.footer || '';
+  $('p-site').innerHTML = formatHtmlBreaks(company.footer || '');
 }
 
 /** In đậm tên công ty trong lời chúc tiếng Việt */

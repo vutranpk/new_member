@@ -2,7 +2,7 @@
 import { loadCompanies } from './data.js';
 import { applyBrand, setLogo, renderPoster, fitName, defaultMessages, createPhotoController } from './poster.js';
 import { exportPoster } from './export.js';
-import { slugify, formatPhone, titleCaseVi, escapeHtml } from './utils.js';
+import { slugify, formatPhone, titleCaseVi, escapeHtml, formatHtmlBreaks } from './utils.js';
 
 const $ = (id) => document.getElementById(id);
 const DRAFT_KEY = 'ws:draft:v1';
@@ -173,7 +173,10 @@ function previewCompany(c) {
   const bg = $('mock-bg');
   if (c.background) { bg.hidden = false; bg.src = c.background; } else { bg.hidden = true; }
   setLogo($('mock-logo'), $('mock-logo-text'), c);
-  if ($('mock-site')) $('mock-site').textContent = c.footer || '';
+  const cfg = window.WS_CONFIG || {};
+  if ($('mock-announce-vi')) $('mock-announce-vi').innerHTML = formatHtmlBreaks(c.announceVi || cfg.DEFAULT_ANNOUNCE_VI);
+  if ($('mock-announce-en')) $('mock-announce-en').innerHTML = formatHtmlBreaks(c.announceEn || cfg.DEFAULT_ANNOUNCE_EN);
+  if ($('mock-site')) $('mock-site').innerHTML = formatHtmlBreaks(c.footer || '');
   if ($('mock-msg-vi') && c.legalName) {
     $('mock-msg-vi').innerHTML = `Chào mừng anh gia nhập <strong>${escapeHtml(c.legalName)}</strong>. Chúc anh sớm hòa nhập, phát triển và gặt hái nhiều thành công trên cương vị mới!`;
     if ($('mock-msg-en')) $('mock-msg-en').textContent = `Welcome to ${c.legalName}! We wish him a smooth transition, continued growth, and great success in his new role.`;

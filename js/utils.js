@@ -66,3 +66,16 @@ export function titleCaseVi(s) {
   return String(s || '').trim().replace(/\s+/g, ' ')
     .split(' ').map((w) => w.charAt(0).toLocaleUpperCase('vi') + w.slice(1).toLocaleLowerCase('vi')).join(' ');
 }
+
+/**
+ * Chuyển đổi các định dạng xuống dòng (<br>, <br/>, <br />, \n, \r\n) thành thẻ <br> chuẩn trong HTML,
+ * đồng thời escape phần text để chống lỗi hoặc injection.
+ */
+export function formatHtmlBreaks(raw) {
+  if (!raw) return '';
+  return String(raw)
+    .split(/<br\s*\/?>|\r?\n/gi)
+    .map((seg) => escapeHtml(seg.trim()))
+    .join('<br>');
+}
+
