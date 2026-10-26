@@ -59,7 +59,7 @@
 /* ---- Hero: Welcome + tên | ảnh (Khoảng cách & tỉ lệ theo template người dùng chỉnh) ---- */
 .poster__hero {
   display: grid; grid-template-columns: 300px 1fr; gap: 40px;
-  align-items: center; margin-top: 36px; padding-right: 20px;
+  align-items: center; padding-right: 20px;
 }
 .poster__intro { min-width: 0; }
 .poster__welcome { width: 300px; margin-left: -4px; margin-bottom: 4px; }
@@ -94,7 +94,8 @@
 .poster__photo-back {
   background: var(--brand-primary);
   border-radius: 26px;
-  transform: translate(0px, 12px);
+  transform: translate(0px, 8px);
+  left: 8px; right: -8px; opacity: 0.6;
 }
 .poster__photo-frame {
   border-radius: 24px;
@@ -124,19 +125,18 @@
 
 /* ---- Thông tin 2 cột (Cột 1 380px theo template) ---- */
 .poster__facts {
-  display: grid; grid-template-columns: 380px 1fr; column-gap: 24px; row-gap: 16px;padding-left: 20px;
-  margin: 36px 0 0; padding-top: 0; border-top: none;
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: 24px; row-gap: 16px;padding-left: 20px; padding-top: 0; border-top: none;
 }
 .fact { min-width: 0; }
-.fact dt { font-weight: 500; font-style: italic; font-size: 12.5px; letter-spacing: .01em; color: var(--p-muted); }
-.fact dt em { font-weight: 400; font-style: italic; letter-spacing: .01em; text-transform: none; font-size: 12.5px; }
-.fact dd { margin: 4px 0 0; font-weight: 500; font-size: 15px; line-height: 1.35; color: var(--brand-ink); overflow-wrap: anywhere; }
+.fact dt { font-weight: 600; font-style: italic; font-size: 14px; letter-spacing: .01em; color: var(--p-muted); }
+.fact dt em { font-weight: 500; font-style: italic; letter-spacing: .01em; text-transform: none; font-size: 14px; }
+.fact dd { margin: 4px 0 0; font-weight: 600; font-size: 18px; line-height: 1.35; color: var(--brand-ink); overflow-wrap: anywhere; }
 
 /* ---- Lời chúc + chân trang (Dải guide 5 & 6: 36px) ---- */
-.poster__foot { margin-top: 36px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.poster__foot {text-align: center; display: flex; flex-direction: column; align-items: center; }
 .poster__msg-vi { font-size: 14px; line-height: 1.55; color: var(--brand-ink); max-width: 580px; text-wrap: balance; }
 .poster__msg-vi strong { font-weight: 700; color: var(--brand-ink); }
-.poster__msg-en { margin-top: 6px; font-style: italic; font-size: 12px; line-height: 1.5; color: var(--p-muted); max-width: 580px; text-wrap: balance; }
+.poster__msg-en { margin-top: 6px!important; font-style: italic; font-size: 13px; line-height: 1.5; color: var(--p-muted); max-width: 580px; text-wrap: balance; }
 .poster__site { margin-top: 36px!important; font-weight: 700; font-size: 13px; letter-spacing: .15em; text-transform: uppercase; color: var(--brand-ink); }
 
 /* ---- Ô chưa nhập: chỉ hiện ở bản xem trước, không có trong file xuất ---- */
