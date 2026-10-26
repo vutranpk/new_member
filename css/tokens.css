@@ -17,40 +17,44 @@
 
 :root {
   /* ---- Typography ---- */
-  --font: "Barlow", sans-serif;
+  --font: "Barlow", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-semi: "Barlow Semi Condensed", "Barlow", sans-serif;
   --font-display: "Barlow Condensed", "Barlow", sans-serif;
 
-  --text-display: clamp(3.25rem, 2rem + 4.6vw, 6.25rem); /* tiêu đề màn chọn công ty */
-  --text-h1: 2rem;
-  --text-h2: 1.375rem;
+  --text-display: clamp(3rem, 1.8rem + 4vw, 5.5rem); /* tiêu đề màn chọn công ty */
+  --tracking-display: -0.015em;
+  --text-h1: 1.875rem;      /* 30px */
+  --text-h2: 1.25rem;       /* 20px */
   --text-body: 0.9375rem;   /* 15px */
   --text-small: 0.8125rem;  /* 13px */
-  --text-label: 0.75rem;    /* 12px, chữ in hoa giãn */
-  --tracking-label: 0.1em;
+  --text-label: 0.72rem;    /* 11.5px, chữ in hoa giãn */
+  --tracking-label: 0.08em;
 
   /* ---- Neutral palette ---- */
-  --ink-950: #08141A;   /* nền bàn làm việc */
-  --ink-900: #0D1E26;   /* topbar */
-  --ink-800: #142B36;
-  --ink-700: #23414E;
-  --line-dark: rgba(255, 255, 255, 0.1);
-  --line-dark-strong: rgba(255, 255, 255, 0.22);
+  --ink-950: #0A141A;   /* nền bàn làm việc studio */
+  --ink-900: #0F1F27;   /* topbar và panel nền tối */
+  --ink-850: #142832;   /* thẻ card nổi trên nền tối */
+  --ink-800: #1A323E;
+  --ink-700: #254250;
+  --line-dark: rgba(255, 255, 255, 0.08);
+  --line-dark-strong: rgba(255, 255, 255, 0.16);
 
-  --paper: #F4F1EA;     /* panel nhập liệu, gợi màu giấy in */
+  --paper: #F5F3EC;     /* panel nhập liệu, màu giấy in mỹ thuật cao cấp */
   --paper-raised: #FFFFFF;
-  --line: #DED8CC;
-  --line-strong: #BFB7A8;
+  --line: #DDD7CA;
+  --line-strong: #BFB7A6;
 
   /* ---- Semantic roles ---- */
-  --text: #12232B;
-  --text-muted: #56656C;          /* 5.1:1 trên --paper */
-  --text-on-dark: #EDF1F2;
-  --text-muted-on-dark: #9AACB4;  /* 7.6:1 trên --ink-950 */
-  --focus: #2A9AD6;
-  --danger: #B42318;
+  --text: #112028;
+  --text-muted: #53646C;          /* ~5.6:1 tương phản trên --paper */
+  --text-on-dark: #F0F4F6;
+  --text-muted-on-dark: #8E9FA8;  /* ~8.2:1 tương phản trên --ink-950 */
+  --focus: #11A3DC;
+  --danger: #D92D20;
+  --danger-subtle: rgba(217, 45, 32, 0.08);
   --danger-on-dark: #FF8A80;
-  --success: #1E7A4C;
+  --success: #12B76A;
+  --success-subtle: rgba(18, 183, 106, 0.12);
 
   /* Màu thương hiệu: JS ghi đè theo công ty đang chọn */
   --brand-ink: #103D54;
@@ -69,11 +73,13 @@
   --space-7: 48px;
   --space-8: 72px;
 
-  --radius-s: 6px;
-  --radius-m: 10px;
+  --radius-s: 8px;
+  --radius-m: 12px;
+  --radius-l: 16px;
+  --radius-full: 9999px;
   --control-h: 44px;
 
-  --shadow-sheet: 0 1px 0 rgba(255,255,255,.04) inset, 0 30px 60px -20px rgba(0,0,0,.65), 0 12px 24px -12px rgba(0,0,0,.5);
+  --shadow-sheet: 0 1px 0 rgba(255,255,255,.05) inset, 0 25px 60px -15px rgba(0,0,0,.75), 0 8px 20px -6px rgba(0,0,0,.5);
   --ease: cubic-bezier(.2, .7, .2, 1);
   --dur: 220ms;
 
