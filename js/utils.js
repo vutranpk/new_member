@@ -76,6 +76,7 @@ export function formatHtmlBreaks(raw) {
   return String(raw)
     .split(/<br\s*\/?>|\r?\n/gi)
     .map((seg) => escapeHtml(seg.trim()))
+    .filter(Boolean)
     .join('<br>');
 }
 
