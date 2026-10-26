@@ -23,7 +23,7 @@ const state = {
 };
 
 function emptyForm() {
-  return { salutation: 'mr', name: '', titleVi: '', titleEn: '', dept: '', start: '', manager: '', phone: '', ext: '', email: '', autoMsg: true, msgVi: '', msgEn: '' };
+  return { salutation: '', name: '', titleVi: '', titleEn: '', dept: '', start: '', manager: '', phone: '', ext: '', email: '', autoMsg: true, msgVi: '', msgEn: '' };
 }
 
 /* ==========================================================================
@@ -265,8 +265,15 @@ function bindEditor() {
   });
 
   form.querySelectorAll('input[name="salutation"]').forEach((r) => {
-    r.checked = r.value === state.form.salutation;
-    r.addEventListener('change', () => { state.form.salutation = r.value; syncMessages(); saveDraft(); refresh(); });
+    r.checked = state.form.salutation ? r.value === state.form.salutation : false;
+    r.addEventListener('change', () => {
+      state.form.salutation = r.value;
+      const group = $('salute-group');
+      if (group) group.removeAttribute('aria-invalid');
+      const err = $('salute-error');
+      if (err) err.hidden = true;
+      syncMessages(); saveDraft(); refresh();
+    });
   });
 
   const auto = $('f-auto-msg');
@@ -379,15 +386,18 @@ function bindStudio() {
     if (!confirm('Xóa toàn bộ thông tin và ảnh đang nhập?')) return;
     state.form = emptyForm();
     FIELDS.forEach((k) => { const el = $(INPUT_ID[k]); el.value = ''; el.removeAttribute('aria-invalid'); });
-    document.querySelector('input[name="salutation"][value="mr"]').checked = true;
+    form.querySelectorAll('input[name="salutation"]').forEach((r) => { r.checked = false; });
+    const group = $('salute-group');
+    if (group) group.removeAttribute('aria-invalid');
+    const err = $('salute-error');
+    if (err) err.hidden = true;
     $('f-auto-msg').checked = true;
     $('photo-remove').click();
     syncMessages(); saveDraft(); refresh();
     $('f-name').focus();
   });
 
-  $('export-png').addEventListener('click', () => runExport('jpg'));
-  $('export-pdf').addEventListener('click', () => runExport('pdf'));
+  $('export-png').addEventListener('click', () => runExport());
 
   new ResizeObserver(() => layoutCanvas()).observe($('viewport'));
 }
@@ -416,30 +426,51 @@ function layoutCanvas() {
 /* ---- Xuất file ---- */
 function updateExportButtons() {
   const ok = state.fontsReady && !state.busy;
-  $('export-png').disabled = !ok;
-  $('export-pdf').disabled = !ok;
+  const btn = $('export-png');
+  if (btn) btn.disabled = !ok;
 }
 
-async function runExport(format) {
-  const missing = Object.keys(REQUIRED).filter((k) => !state.form[k]);
-  Object.keys(REQUIRED).forEach((k) => $(INPUT_ID[k]).toggleAttribute('aria-invalid', missing.includes(k)));
-  missing.forEach((k) => $(INPUT_ID[k]).setAttribute('aria-invalid', 'true'));
+async function runExport() {
+  const missing = [];
+  const saluteGroup = $('salute-group');
+  const saluteErr = $('salute-error');
+
+  if (!state.form.salutation) {
+    missing.push({ key: 'salutation', label: 'Danh xưng' });
+    if (saluteGroup) saluteGroup.setAttribute('aria-invalid', 'true');
+    if (saluteErr) saluteErr.hidden = false;
+  } else {
+    if (saluteGroup) saluteGroup.removeAttribute('aria-invalid');
+    if (saluteErr) saluteErr.hidden = true;
+  }
+
+  Object.keys(REQUIRED).forEach((k) => {
+    const el = $(INPUT_ID[k]);
+    const isMissing = !state.form[k];
+    if (isMissing) missing.push({ key: k, label: REQUIRED[k] });
+    if (el) el.toggleAttribute('aria-invalid', isMissing);
+  });
+
   if (missing.length) {
-    toast(`Còn thiếu: ${missing.map((k) => REQUIRED[k]).join(', ')}.`, 'err');
-    $(INPUT_ID[missing[0]]).focus();
+    toast(`Còn thiếu: ${missing.map((m) => m.label).join(', ')}.`, 'err');
+    if (!state.form.salutation) {
+      document.querySelector('input[name="salutation"]')?.focus();
+    } else if (missing[0]) {
+      $(INPUT_ID[missing[0].key])?.focus();
+    }
     return;
   }
   if (!photo.get() && !confirm('Poster chưa có ảnh chân dung. Vẫn tải về?')) return;
 
-  const btn = $(format === 'pdf' ? 'export-pdf' : 'export-png');
+  const btn = $('export-png');
   const label = btn.innerHTML;
   state.busy = true; updateExportButtons();
   btn.classList.add('is-busy');
   btn.innerHTML = `<span class="spinner" aria-hidden="true"></span><span>Đang xuất…</span>`;
   try {
     const name = `thong-bao-nhan-su-moi_${slugify(state.form.name)}_${slugify(state.company.id)}`;
-    await exportPoster($('poster'), format, name);
-    toast(format === 'pdf' ? 'Đã tải file PDF A4.' : 'Đã tải ảnh A4 (JPG 2480 × 3508 px, 300 DPI).', 'ok');
+    await exportPoster($('poster'), 'jpg', name);
+    toast('Đã tải ảnh A4 (JPG 2480 × 3508 px, 300 DPI).', 'ok');
   } catch (err) {
     console.error(err);
     toast('Xuất file không thành công. Thử tải lại trang rồi xuất lại.', 'err');

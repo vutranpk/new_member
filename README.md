@@ -34,8 +34,7 @@
    - Rời ô email sẽ tự ghép đuôi `@domain` của công ty đang chọn.
    - Rời ô số điện thoại tự định dạng nhóm số Việt Nam `09xx xxx xxx`.
 5. **Xuất file A4 siêu nét (300 DPI):**
-   - Nút **Tải ảnh A4**: Xuất định dạng JPG chất lượng cao đúng chuẩn $2480 \times 3508\text{ px}$, tối ưu dung lượng gửi mail/Zalo.
-   - Nút **PDF**: Xuất file PDF vector A4 chuẩn in ấn.
+   - Nút **Tải ảnh A4**: Xuất định dạng JPG chất lượng cao đúng chuẩn $2480 \times 3508\text{ px}$, 300 DPI tối ưu dung lượng để in ấn và gửi thông báo nội bộ.
 
 ---
 

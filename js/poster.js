@@ -36,9 +36,9 @@ export function setLogo(img, textEl, company, { short = false } = {}) {
    Lời chúc mặc định theo danh xưng
 --------------------------------------------------------------------------- */
 export function pronouns(salutation) {
-  return salutation === 'ms'
-    ? { vi: 'chị', salute: 'Chị / Ms.', obj: 'her', poss: 'her' }
-    : { vi: 'anh', salute: 'Anh / Mr.', obj: 'him', poss: 'his' };
+  if (salutation === 'ms') return { vi: 'chị', salute: 'Chị / Ms.', obj: 'her', poss: 'her' };
+  if (salutation === 'mr') return { vi: 'anh', salute: 'Anh / Mr.', obj: 'him', poss: 'his' };
+  return { vi: 'anh/chị', salute: '', obj: 'them', poss: 'their' };
 }
 
 export function defaultMessages(salutation, company) {
@@ -46,8 +46,14 @@ export function defaultMessages(salutation, company) {
   const legal = company.legalName;
   const end = /[.!?]$/.test(legal) ? '' : '.';
   return {
-    vi: `Chào mừng ${p.vi} gia nhập ${legal}${end} Chúc ${p.vi} sớm hòa nhập, phát triển<br>và gặt hái nhiều thành công trên cương vị mới!`,
-    en: `Welcome to ${legal}! We wish ${p.obj} a smooth transition, continued growth, and great<br>success in ${p.poss} new role.`,
+    vi: salutation
+      ? `Chào mừng ${p.vi} gia nhập ${legal}${end} Chúc ${p.vi} sớm hòa nhập, phát triển<br>và gặt hái nhiều thành công trên cương vị mới!`
+      : `Chào mừng anh/chị gia nhập ${legal}${end} Chúc anh/chị sớm hòa nhập, phát triển<br>và gặt hái nhiều thành công trên cương vị mới!`,
+    en: salutation === 'ms'
+      ? `Welcome to ${legal}! We wish her a smooth transition, continued growth, and great<br>success in her new role.`
+      : (salutation === 'mr'
+        ? `Welcome to ${legal}! We wish him a smooth transition, continued growth, and great<br>success in his new role.`
+        : `Welcome to ${legal}! We wish you a smooth transition, continued growth, and great<br>success in your new role.`),
   };
 }
 
@@ -63,7 +69,7 @@ export function renderPoster(state, company) {
   const viAnnounce = company.announceVi || cfg.DEFAULT_ANNOUNCE_VI;
   $('p-announce-vi').innerHTML = viAnnounce.includes('<br>') ? viAnnounce : escapeHtml(viAnnounce);
   $('p-announce-en').textContent = company.announceEn || cfg.DEFAULT_ANNOUNCE_EN;
-  $('p-salute').textContent = p.salute;
+  $('p-salute').innerHTML = state.salutation ? escapeHtml(p.salute) : ph('Danh xưng');
 
   $('p-name').innerHTML = state.name ? escapeHtml(state.name) : ph('Họ và tên');
   $('p-title-vi').innerHTML = state.titleVi ? escapeHtml(state.titleVi) : ph('Chức danh');

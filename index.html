@@ -66,7 +66,7 @@
                 <section class="poster__hero">
                   <div class="poster__intro">
                     <div class="poster__welcome" id="mock-welcome"></div>
-                    <p class="poster__salute" id="mock-salute">Anh / Mr.</p>
+                    <p class="poster__salute" id="mock-salute"><span class="is-placeholder">Danh xưng</span></p>
                     <p class="poster__name" id="mock-name-val"><span class="is-placeholder">Họ và tên</span></p>
                     <p class="poster__role-vi" id="mock-role-vi"><span class="is-placeholder">Chức danh</span></p>
                     <p class="poster__role-en" id="mock-role-en" lang="en"></p>
@@ -133,9 +133,6 @@
         <button type="button" class="btn btn--ghost-dark" id="reset-form">
           <i data-lucide="rotate-ccw" class="icon" aria-hidden="true"></i><span class="hide-narrow">Làm mới</span>
         </button>
-        <button type="button" class="btn btn--secondary-dark" id="export-pdf" disabled>
-          <i data-lucide="file-text" class="icon" aria-hidden="true"></i><span>PDF</span>
-        </button>
         <button type="button" class="btn btn--primary" id="export-png" disabled>
           <i data-lucide="download" class="icon" aria-hidden="true"></i><span>Tải ảnh A4</span>
         </button>
@@ -148,12 +145,13 @@
         <fieldset class="section">
           <legend class="section__head"><span class="section__num">01</span><span class="section__title">Nhân sự</span></legend>
 
-          <div class="field">
-            <span class="field__label" id="salute-label">Danh xưng</span>
-            <div class="segmented" role="radiogroup" aria-labelledby="salute-label">
-              <label class="segmented__opt"><input type="radio" name="salutation" value="mr" checked><span>Anh / Mr.</span></label>
+          <div class="field" id="field-salute">
+            <span class="field__label" id="salute-label">Danh xưng <span class="req" aria-hidden="true">*</span></span>
+            <div class="segmented" id="salute-group" role="radiogroup" aria-labelledby="salute-label">
+              <label class="segmented__opt"><input type="radio" name="salutation" value="mr"><span>Anh / Mr.</span></label>
               <label class="segmented__opt"><input type="radio" name="salutation" value="ms"><span>Chị / Ms.</span></label>
             </div>
+            <p class="field__error" id="salute-error" hidden>Vui lòng chọn danh xưng (Anh / Mr. hoặc Chị / Ms.) trước khi xuất hình.</p>
           </div>
 
           <div class="field">
@@ -286,7 +284,7 @@
                     <section class="poster__hero">
                       <div class="poster__intro">
                         <div class="poster__welcome" id="p-welcome"></div>
-                        <p class="poster__salute" id="p-salute">Anh / Mr.</p>
+                        <p class="poster__salute" id="p-salute"><span class="is-placeholder preview-only">Danh xưng</span></p>
                         <p class="poster__name" id="p-name"></p>
                         <p class="poster__role-vi" id="p-title-vi"></p>
                         <p class="poster__role-en" id="p-title-en" lang="en"></p>
@@ -339,7 +337,6 @@
   <script src="vendor/lucide.min.js"></script>
   <script src="vendor/papaparse.min.js"></script>
   <script src="vendor/html-to-image.js"></script>
-  <script src="vendor/jspdf.umd.min.js"></script>
   <script src="js/config.js"></script>
   <script type="module" src="js/app.js"></script>
 </body>
