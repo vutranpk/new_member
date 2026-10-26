@@ -79,7 +79,7 @@ export function renderPoster(state, company) {
     parts.push([escapeHtml(phone), state.ext ? `(Ext: ${escapeHtml(state.ext)})` : ''].filter(Boolean).join(' '));
   }
   if (state.email) parts.push(escapeHtml(state.email));
-  $('p-contact').innerHTML = parts.length ? parts.join('<br>') : ph('Điện thoại<br>Email');
+  $('p-contact').innerHTML = parts.length ? parts.join('<br>') : ph('Điện thoại / Email');
 
   const msg = state.autoMsg ? defaultMessages(state.salutation, company) : { vi: state.msgVi, en: state.msgEn };
   const rawVi = msg.vi || '';
