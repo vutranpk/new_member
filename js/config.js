@@ -5,7 +5,7 @@
  * Để trống = dùng dữ liệu mẫu trong data/companies.sample.csv.
  */
 window.WS_CONFIG = {
-  SHEET_CSV_URL: '',
+  SHEET_CSV_URL: 'https://docs.google.com/spreadsheets/d/1mx8Qg3OWAx2jSLFRXrljgXkpO4ghBwJQ-ax33oRC5OU/export?format=csv',
   SAMPLE_CSV_URL: 'data/companies.sample.csv',
 
   // Kích thước xuất file: A4 ở 300 DPI
