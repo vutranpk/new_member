@@ -70,7 +70,7 @@ async function loadList() {
     const tag = $('data-source');
     tag.hidden = false;
     tag.className = `source-tag source-tag--${source === 'sample' ? 'sample' : 'sheet'}`;
-    tag.textContent = { sample: 'Dữ liệu nội bộ', sheet: 'Đồng bộ trực tuyến', cache: 'Bản lưu ngoại tuyến' }[source];
+    tag.textContent = { sample: 'Local Data', sheet: 'Live Sync', cache: 'Offline Cache' }[source];
     if (warning) status.textContent = warning;
     renderList('');
     previewCompany(companies[0]);
