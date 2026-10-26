@@ -19,8 +19,8 @@ export async function loadCompanies() {
       return { companies, source: 'sheet' };
     } catch (err) {
       const cached = readCache();
-      if (cached) return { companies: cached, source: 'cache', warning: 'Không tải được Google Sheet, đang dùng bản lưu gần nhất.' };
-      throw new Error('Không tải được Google Sheet. Kiểm tra link CSV trong js/config.js và kết nối mạng.');
+      if (cached) return { companies: cached, source: 'cache', warning: 'Không kết nối được dữ liệu trực tuyến, đang dùng bản lưu gần nhất.' };
+      throw new Error('Không kết nối được dữ liệu trực tuyến. Vui lòng kiểm tra kết nối mạng.');
     }
   }
 
