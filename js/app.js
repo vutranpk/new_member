@@ -3,6 +3,7 @@ import { loadCompanies } from './data.js';
 import { applyBrand, setLogo, renderPoster, fitName, defaultMessages, createPhotoController } from './poster.js';
 import { exportPoster } from './export.js';
 import { slugify, formatPhone, titleCaseVi, escapeHtml, formatHtmlBreaks } from './utils.js';
+import { motion } from './motion.js';
 
 const $ = (id) => document.getElementById(id);
 const DRAFT_KEY = 'ws:draft:v1';
@@ -52,7 +53,12 @@ async function init() {
   const params = new URLSearchParams(location.search);
   const demoName = params.has('demo') ? (params.get('demo') || 'demo') : null;
   const initial = params.get('c') && state.companies.find((c) => c.id === params.get('c'));
-  if (initial) openStudio(initial, { focus: false });
+  if (initial) {
+    openStudio(initial, { focus: false, animate: false });
+  } else {
+    motion.animateGateIntro();
+    motion.animateSparks();
+  }
   if (demoName) loadDemo(demoName);
 }
 
@@ -114,6 +120,7 @@ function renderList(query) {
       </button>
     </li>`).join('');
   window.lucide?.createIcons();
+  motion.animateListRows();
 }
 
 function initials(name) {
@@ -183,45 +190,68 @@ function previewCompany(c) {
   }
   $('mock-name').textContent = c.name;
   document.querySelectorAll('.company-row').forEach((r) => r.classList.toggle('is-active', r.dataset.id === c.id));
+  motion.animateCompanyPreview();
 }
 
 /* ==========================================================================
    Studio
    ========================================================================== */
-function openStudio(company, { focus = true } = {}) {
+function openStudio(company, { focus = true, animate = true } = {}) {
   if (!company) return;
   state.company = company;
   previewId = null;
   applyBrand(company);
 
-  setLogo($('tb-logo'), $('tb-logo-text'), company, { short: true });
-  $('tb-name').textContent = company.name;
-  $('tb-legal').textContent = company.legalName;
+  const setupStudio = () => {
+    setLogo($('tb-logo'), $('tb-logo-text'), company, { short: true });
+    $('tb-name').textContent = company.name;
+    $('tb-legal').textContent = company.legalName;
 
-  const bg = $('p-bg');
-  if (company.background) { bg.hidden = false; bg.src = company.background; } else { bg.hidden = true; }
-  setLogo($('p-logo'), $('p-logo-text'), company);
-  $('f-email').placeholder = company.emailDomain ? `ten@${company.emailDomain}` : 'ten@congty.vn';
+    const bg = $('p-bg');
+    if (company.background) { bg.hidden = false; bg.src = company.background; } else { bg.hidden = true; }
+    setLogo($('p-logo'), $('p-logo-text'), company);
+    $('f-email').placeholder = company.emailDomain ? `ten@${company.emailDomain}` : 'ten@congty.vn';
 
-  $('gate').hidden = true;
-  $('studio').hidden = false;
-  document.title = `${company.name} — Welcome Studio`;
-  history.replaceState(null, '', `${location.pathname}?c=${encodeURIComponent(company.id)}${location.search.includes('demo') ? '&demo' : ''}`);
+    $('gate').hidden = true;
+    $('studio').hidden = false;
+    document.title = `${company.name} — Welcome Studio`;
+    history.replaceState(null, '', `${location.pathname}?c=${encodeURIComponent(company.id)}${location.search.includes('demo') ? '&demo' : ''}`);
 
-  syncMessages();
-  refresh();
-  requestAnimationFrame(() => { layoutCanvas(); photo.refresh(); });
-  if (focus) $('f-name').focus({ preventScroll: true });
+    syncMessages();
+    refresh();
+    layoutCanvas();
+    photo.refresh();
+    motion.animateSparks($('poster'));
+  };
+
+  if (animate && focus) {
+    motion.animateTransitionToStudio({
+      onMidpoint: setupStudio,
+      onComplete: () => {
+        layoutCanvas();
+        $('f-name').focus({ preventScroll: true });
+      }
+    });
+  } else {
+    setupStudio();
+    if (focus) $('f-name').focus({ preventScroll: true });
+  }
 }
 
 function closeStudio() {
-  $('studio').hidden = true;
-  $('gate').hidden = false;
-  document.title = 'Welcome Studio — Thông báo nhân sự mới';
-  history.replaceState(null, '', location.pathname);
-  if (state.company) previewCompany(state.company);
-  const row = document.querySelector(`.company-row[data-id="${CSS.escape(state.company?.id || '')}"]`);
-  (row || $('company-search')).focus();
+  motion.animateTransitionToGate({
+    onMidpoint: () => {
+      $('studio').hidden = true;
+      $('gate').hidden = false;
+      document.title = 'Welcome Studio — Thông báo nhân sự mới';
+      history.replaceState(null, '', location.pathname);
+      if (state.company) previewCompany(state.company);
+    },
+    onComplete: () => {
+      const row = document.querySelector(`.company-row[data-id="${CSS.escape(state.company?.id || '')}"]`);
+      (row || $('company-search')).focus();
+    }
+  });
 }
 
 function refresh() {
@@ -276,6 +306,7 @@ function bindEditor() {
       const err = $('salute-error');
       if (err) err.hidden = true;
       syncMessages(); saveDraft(); refresh();
+      motion.animateSaluteChange($('p-salute'));
     });
   });
 
@@ -366,6 +397,7 @@ function setPhoto(src, w, h, filename, opts) {
   $('f-zoom').value = Math.round((opts?.zoom || 1) * 100);
   $('photo-tools').hidden = false;
   $('dropzone').hidden = true;
+  motion.animatePhotoIn($('p-photo-frame'));
 }
 
 function readAsDataURL(blob) {
@@ -488,9 +520,9 @@ function toast(text, kind = 'ok') {
   const t = $('toast');
   $('toast-text').textContent = text;
   t.dataset.kind = kind;
-  t.hidden = false;
+  motion.showToast(t);
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { t.hidden = true; }, kind === 'err' ? 6000 : 3500);
+  toastTimer = setTimeout(() => { motion.hideToast(t); }, kind === 'err' ? 6000 : 3500);
 }
 
 /* ---- Lưu nháp trong phiên (không lưu ảnh) ---- */

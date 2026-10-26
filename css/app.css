@@ -337,12 +337,10 @@ input[type="date"].input { padding-right: var(--space-2); }
   padding: var(--space-3) var(--space-4); border-radius: var(--radius-m);
   background: var(--paper-raised); color: var(--text); font-weight: 500;
   box-shadow: 0 16px 40px -12px rgba(0,0,0,.5);
-  animation: toast-in var(--dur) var(--ease);
 }
 .toast__icon { display: none; }
 .toast[data-kind="ok"] .toast__icon--ok { display: block; color: var(--success); }
 .toast[data-kind="err"] .toast__icon--err { display: block; color: var(--danger); }
-@keyframes toast-in { from { opacity: 0; transform: translate(-50%, 8px); } }
 
 /* ==========================================================================
    Responsive
