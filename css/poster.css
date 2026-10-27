@@ -32,10 +32,11 @@
 /* Vùng nội dung nằm gọn trên phần giấy trắng của ảnh nền */
 .poster__content {
   position: absolute;
-  left: 42px; right: 42px; top: 41px; bottom: 38px;
+  left: 24px; right: 24px; top: 36px; bottom: 36px;
   padding: 24px 38px 12px;
   display: flex; flex-direction: column;
-  justify-content: space-between; align-items: center;
+  justify-content: flex-start;
+  align-items: center;
   box-sizing: border-box;
 }
 
@@ -45,10 +46,10 @@
   text-align: center; width: 100%;
 }
 .poster__logo {
-  height: 80px; display: grid; place-items: center; margin-bottom: 10px;
+  display: grid; place-items: center; margin-bottom: 10px;
 }
 .poster__logo img {
-  max-height: 80px; max-width: 220px; width: auto; height: auto; object-fit: contain;
+  max-height: 146px;width: auto; height: auto; object-fit: contain;
 }
 .poster__logo-text {
   font-family: var(--font-display); font-weight: 700; font-size: 32px; line-height: 1;
@@ -56,30 +57,30 @@
 }
 .poster__title {
   margin: 0;
-  font-family: var(--font-display); font-weight: 700; font-size: 33px; line-height: 1.1;
+  font-family: var(--font-display); font-weight: 700; font-size: 42px; line-height: 1.1;
   text-transform: uppercase; letter-spacing: .025em;
   color: var(--brand-primary, #0099D8);
 }
 .poster__kicker {
   margin: 4px 0 10px;
-  font-family: var(--font); font-weight: 700; font-style: italic; font-size: 16px; line-height: 1.2;
+  font-family: var(--font); font-weight: 700; font-style: italic; font-size: 24px; line-height: 1.2;
   letter-spacing: .04em; text-transform: uppercase;
   color: var(--brand-primary, #0099D8);
 }
 .poster__announce-vi {
-  font-family: var(--font); font-weight: 500; font-size: 14.5px; line-height: 1.35;
+  font-family: var(--font); font-weight: 500; font-size: 18.5px; margin-top: 12px !important; line-height: 1.35;
   color: var(--brand-ink, #103D54); max-width: 580px;
 }
 .poster__announce-en {
   margin-top: 3px;
-  font-family: var(--font); font-weight: 400; font-style: italic; font-size: 13px; line-height: 1.35;
+  font-family: var(--font); font-weight: 400; font-style: italic; font-size: 15px; line-height: 1.35;
   color: var(--brand-ink, #103D54); max-width: 600px;
 }
 
 /* ---- 2. Profile: Ảnh chân dung (trái) + Bảng thông tin 8 dòng (phải) ---- */
 .poster__profile {
   display: grid; grid-template-columns: 195px 1fr; gap: 28px;
-  align-items: center; width: 100%; margin: 6px 0;
+  align-items: center; width: 100%; margin: 20px 0 6px 0;
 }
 .poster__photo {
   position: relative; margin: 0;
@@ -106,15 +107,15 @@
 }
 
 .poster__details {
-  display: flex; flex-direction: column; justify-content: space-between;
-  height: 254px;
+  display: flex; flex-direction: column; justify-content: space-evenly;
+  height: 254px; gap: 0;
 }
 .poster__detail-row {
-  display: grid; grid-template-columns: 185px 1fr; align-items: baseline; gap: 10px;
-  font-size: 14.5px; line-height: 1.35; color: var(--brand-ink, #103D54);
+  display: grid; grid-template-columns: 180px 1fr; align-items: baseline; gap: 8px;
+  font-size: 16px; line-height: 1.35; color: var(--brand-ink, #103D54);
 }
 .detail-label {
-  font-weight: 500; color: var(--brand-ink, #103D54); white-space: nowrap;
+  font-weight: 500; color: var(--brand-ink, #103D54); white-space: nowrap;letter-spacing: -4%;
 }
 .detail-label em {
   font-style: italic; font-weight: 400;
@@ -126,7 +127,7 @@
   font-style: italic; font-weight: 400;
 }
 .detail-value--highlight {
-  font-family: var(--font-display); font-weight: 700; font-size: 21px; line-height: 1;
+  font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 1;
   text-transform: uppercase; letter-spacing: .02em;
   color: var(--brand-primary, #0099D8);
 }
@@ -134,17 +135,17 @@
 /* ---- 3. Welcome + Lời chào đón & Lời chúc ---- */
 .poster__welcome-block {
   display: flex; flex-direction: column; align-items: center;
-  text-align: center; width: 100%; margin-top: -4px;
+  text-align: center; width: 100%; margin-top: 16px;gap: 8px;
 }
 .poster__welcome {
-  width: 270px; height: auto; margin-bottom: 4px;
+  width: 360px; height: auto;
 }
 .poster__welcome img, .poster__welcome svg {
   display: block; width: 100%; height: auto;
 }
 .poster__welcome-salute {
   margin: 0 0 2px;
-  font-size: 21px; line-height: 1.2;
+  font-size: 24px; line-height: 1.2;
   color: var(--brand-primary, #0099D8);
 }
 .salute-prefix {
@@ -154,48 +155,46 @@
   font-style: italic; font-weight: 400;
 }
 .salute-name {
-  font-family: var(--font-display); font-weight: 700; font-size: 24px;
-  text-transform: uppercase; letter-spacing: .02em;
+  font-family: var(--font-display); font-weight: 700; font-size: 38px;
+  text-transform: uppercase; letter-spacing: 5%;
 }
 
 .poster__welcome-join {
-  margin: 0 0 10px;
-  font-size: 15px; line-height: 1.35;
+  font-size: 17px; line-height: 1.35;
   color: var(--brand-ink, #103D54);
 }
 .poster__welcome-join em {
   font-style: italic; font-weight: 400;
 }
 .poster__welcome-join strong {
-  font-family: var(--font-display); font-weight: 700; font-size: 17px;
-  text-transform: uppercase; letter-spacing: .02em;
+  font-family: var(--font-display); font-weight: 700; font-size: 24px;
+  text-transform: uppercase; letter-spacing: 5%;
 }
 
 .poster__wishes {
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;margin-top: 8px;
 }
 .poster__wish-vi {
-  font-size: 15px; font-weight: 500; line-height: 1.4;
+  font-size: 20px; font-weight: 500; line-height: 1.4;
   color: var(--brand-ink, #103D54); margin: 0;
 }
 .poster__wish-en {
-  font-size: 13.5px; font-style: italic; font-weight: 400; line-height: 1.4;
+  font-size: 18px; font-style: italic; font-weight: 400; line-height: 1.4;
   color: var(--brand-ink, #103D54); margin: 0;
 }
 .poster__wish-org {
-  margin: 4px 0 0;
-  font-family: var(--font-display); font-weight: 700; font-size: 19px; line-height: 1.2;
-  text-transform: uppercase; letter-spacing: .03em;
+  margin: 4px 0 0!important;
+  font-family: var(--font-display); font-weight: 700; font-size: 28px; line-height: 1.2;
+  text-transform: uppercase; letter-spacing: 10%;
   color: var(--brand-ink, #103D54);
 }
 
 /* ---- 4. Chân trang đen: WWW.KCOFFEE.VN / K COFFEE APP ---- */
 .poster__site-bar {
   position: absolute; left: 0; right: 0; bottom: 0; height: 38px;
-  background: var(--brand-ink, #081E27);
   display: flex; align-items: center; justify-content: center;
-  color: #FFFFFF; font-family: var(--font-display); font-weight: 700;
-  font-size: 17px; letter-spacing: .08em; text-transform: uppercase;
+  color: #FFFFFF; font-family: var(--font-display); font-weight: 600;
+  font-size: 24px; letter-spacing: 10%; text-transform: uppercase;
   z-index: 5;
 }
 
