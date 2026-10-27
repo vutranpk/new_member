@@ -8,9 +8,9 @@
   <link rel="preload" href="fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/barlow-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/tokens.css?v=3.3">
-  <link rel="stylesheet" href="css/app.css?v=3.3">
-  <link rel="stylesheet" href="css/poster.css?v=3.3">
+  <link rel="stylesheet" href="css/tokens.css?v=3.4">
+  <link rel="stylesheet" href="css/app.css?v=3.4">
+  <link rel="stylesheet" href="css/poster.css?v=3.4">
 </head>
 <body>
   <a class="skip-link" href="#main-target">Bỏ qua tới nội dung chính</a>
@@ -56,51 +56,80 @@
                     <img id="mock-logo" alt="">
                     <span id="mock-logo-text" class="poster__logo-text" hidden></span>
                   </div>
-                  <h2 class="poster__title">Giới thiệu nhân sự mới</h2>
-                  <p class="poster__kicker" lang="en">New Employee Announcement</p>
-                  <span class="poster__rule" aria-hidden="true"></span>
-                  <p class="poster__announce-vi" id="mock-announce-vi">Phòng HCNS trân trọng thông báo<br>cùng toàn thể Anh/Chị CBNV</p>
-                  <p class="poster__announce-en" id="mock-announce-en" lang="en">The HR &amp; Administration Department Is Pleased To Announce To All Employees</p>
+                  <h2 class="poster__title">GIỚI THIỆU NHÂN SỰ MỚI</h2>
+                  <p class="poster__kicker" lang="en">NEW EMPLOYEE INTRODUCTION</p>
+                  <p class="poster__announce-vi" id="mock-announce-vi">Phòng HCNS trân trọng thông báo đến toàn thể anh/chị</p>
+                  <p class="poster__announce-en" id="mock-announce-en" lang="en">The Human Resources &amp; Administration Department is pleased to announce to all employees</p>
                 </header>
 
-                <section class="poster__hero">
-                  <div class="poster__intro">
-                    <div class="poster__welcome" id="mock-welcome"></div>
-                    <p class="poster__salute" id="mock-salute"><span class="is-placeholder">Danh xưng</span></p>
-                    <p class="poster__name" id="mock-name-val"><span class="is-placeholder">Họ và tên</span></p>
-                    <p class="poster__role-vi" id="mock-role-vi"><span class="is-placeholder">Chức danh</span></p>
-                    <p class="poster__role-en" id="mock-role-en" lang="en"></p>
-                  </div>
+                <section class="poster__profile">
                   <figure class="poster__photo">
-                    <span class="poster__photo-back" aria-hidden="true"></span>
                     <div class="poster__photo-frame">
                       <div class="poster__photo-empty">
                         <i data-lucide="user-round" class="icon icon--xl" aria-hidden="true"></i>
                         <span>Ảnh chân dung</span>
                       </div>
                     </div>
-                    <svg class="poster__spark poster__spark--a" viewBox="191.6 7.6 21.9 21.3" aria-hidden="true"><path d="m206.86,14.07c-2.4-2.7-4.31-6.43-4.31-6.43,0,0-1.470,3.540-4.020,6.260-2.830,3.020-6.870,4.630-6.870,4.630,0,0,4.040,1.610,6.870,4.630,2.550,2.720,4.020,6.260,4.020,6.260,0,0,1.910-3.730,4.310-6.430,2.780-3.120,6.580-4.460,6.580-4.460,0,0-3.800-1.330-6.580-4.460Z"/></svg>
-                    <svg class="poster__spark poster__spark--b" viewBox="191.6 7.6 21.9 21.3" aria-hidden="true"><path d="m206.86,14.07c-2.4-2.7-4.31-6.43-4.31-6.43,0,0-1.470,3.540-4.020,6.260-2.830,3.020-6.870,4.630-6.870,4.630,0,0,4.040,1.610,6.870,4.630,2.550,2.720,4.020,6.260,4.020,6.260,0,0,1.910-3.730,4.310-6.430,2.780-3.120,6.580-4.460,6.580-4.460,0,0-3.800-1.330-6.580-4.460Z"/></svg>
-                    <svg class="poster__spark poster__spark--c" viewBox="191.6 7.6 21.9 21.3" aria-hidden="true"><path d="m206.86,14.07c-2.4-2.7-4.31-6.43-4.31-6.43,0,0-1.470,3.540-4.020,6.260-2.830,3.020-6.870,4.630-6.870,4.630,0,0,4.040,1.610,6.870,4.630,2.550,2.720,4.020,6.260,4.020,6.260,0,0,1.910-3.730,4.310-6.430,2.780-3.120,6.580-4.460,6.580-4.460,0,0-3.800-1.330-6.580-4.460Z"/></svg>
                   </figure>
+
+                  <div class="poster__details">
+                    <div class="poster__detail-row poster__detail-row--name">
+                      <span class="detail-label">Anh / <em lang="en">Mr.</em></span>
+                      <span class="detail-value detail-value--highlight">ĐẶNG XUÂN THÁI</span>
+                    </div>
+                    <div class="poster__detail-row">
+                      <span class="detail-label">Chức vụ / <em lang="en">Position</em></span>
+                      <span class="detail-value">Trưởng Nhóm Thiết Kế</span>
+                    </div>
+                    <div class="poster__detail-row">
+                      <span class="detail-label">Phòng ban / <em lang="en">Department</em></span>
+                      <span class="detail-value">Thiết Kế</span>
+                    </div>
+                    <div class="poster__detail-row">
+                      <span class="detail-label">Ngày nhận việc / <em lang="en">Start Date</em></span>
+                      <span class="detail-value">13.01.2020</span>
+                    </div>
+                    <div class="poster__detail-row">
+                      <span class="detail-label">ĐTDD / <em lang="en">Mobile</em></span>
+                      <span class="detail-value">0948 631 376</span>
+                    </div>
+                    <div class="poster__detail-row">
+                      <span class="detail-label">Số nội bộ / <em lang="en">Ext</em></span>
+                      <span class="detail-value">716</span>
+                    </div>
+                    <div class="poster__detail-row">
+                      <span class="detail-label">Email</span>
+                      <span class="detail-value">designps@phucsinhconsumer.com</span>
+                    </div>
+                    <div class="poster__detail-row">
+                      <span class="detail-label">QL trực tiếp / <em lang="en">Direct Manager</em></span>
+                      <span class="detail-value">Tổng Giám Đốc / President</span>
+                    </div>
+                  </div>
                 </section>
 
-                <dl class="poster__facts">
-                  <div class="fact"><dt>Quản lý trực tiếp <em lang="en">/ Direct Manager</em></dt><dd class="is-placeholder">Quản lý trực tiếp</dd></div>
-                  <div class="fact"><dt>Phòng ban <em lang="en">/ Department</em></dt><dd class="is-placeholder">Phòng ban</dd></div>
-                  <div class="fact"><dt>Liên hệ <em lang="en">/ Contact</em></dt><dd class="is-placeholder">Điện thoại / Email</dd></div>
-                  <div class="fact"><dt>Ngày nhận việc <em lang="en">/ Start Date</em></dt><dd class="is-placeholder">dd.mm.yyyy</dd></div>
-                </dl>
+                <section class="poster__welcome-block">
+                  <div class="poster__welcome" id="mock-welcome"></div>
 
-                <footer class="poster__foot">
-                  <p class="poster__msg-vi" id="mock-msg-vi">
-                    Chào mừng nhân sự mới gia nhập <strong>Phúc Sinh Consumer Corp.</strong> Chúc anh/chị sớm hòa nhập, phát triển và gặt hái nhiều thành công trên cương vị mới!
+                  <p class="poster__welcome-salute">
+                    <span class="salute-prefix">Anh / <em lang="en">Mr.</em></span>
+                    <strong class="salute-name">ĐẶNG XUÂN THÁI</strong>
                   </p>
-                  <p class="poster__msg-en" id="mock-msg-en" lang="en">
-                    Welcome to Phúc Sinh Consumer Corp.! We wish you a smooth transition, continued growth, and great success in your new role.
+
+                  <p class="poster__welcome-join">
+                    gia nhập / <em lang="en">to</em> <strong>PHUC SINH CONSUMER CORP</strong>
                   </p>
-                  <p class="poster__site" id="mock-site">WWW.KCOFFEE.VN / K COFFEE APP</p>
-                </footer>
+
+                  <div class="poster__wishes">
+                    <p class="poster__wish-vi" id="mock-msg-vi">Chúc anh sớm hòa nhập phát triển &amp; thành công tại</p>
+                    <p class="poster__wish-en" id="mock-msg-en" lang="en">We wish him a smooth transition, continued growth &amp; great success at</p>
+                    <p class="poster__wish-org">PHUC SINH CONSUMER CORP</p>
+                  </div>
+                </section>
+              </div>
+
+              <div class="poster__site-bar">
+                <span id="mock-site">WWW.KCOFFEE.VN / K COFFEE APP</span>
               </div>
             </article>
           </div>
@@ -274,23 +303,14 @@
                         <img id="p-logo" alt="">
                         <span id="p-logo-text" class="poster__logo-text" hidden></span>
                       </div>
-                      <h2 class="poster__title">Giới thiệu nhân sự mới</h2>
-                      <p class="poster__kicker" lang="en">New Employee Announcement</p>
-                      <span class="poster__rule" aria-hidden="true"></span>
+                      <h2 class="poster__title">GIỚI THIỆU NHÂN SỰ MỚI</h2>
+                      <p class="poster__kicker" lang="en">NEW EMPLOYEE INTRODUCTION</p>
                       <p class="poster__announce-vi" id="p-announce-vi"></p>
                       <p class="poster__announce-en" id="p-announce-en" lang="en"></p>
                     </header>
 
-                    <section class="poster__hero">
-                      <div class="poster__intro">
-                        <div class="poster__welcome" id="p-welcome"></div>
-                        <p class="poster__salute" id="p-salute"><span class="is-placeholder preview-only">Danh xưng</span></p>
-                        <p class="poster__name" id="p-name"></p>
-                        <p class="poster__role-vi" id="p-title-vi"></p>
-                        <p class="poster__role-en" id="p-title-en" lang="en"></p>
-                      </div>
+                    <section class="poster__profile">
                       <figure class="poster__photo">
-                        <span class="poster__photo-back" aria-hidden="true"></span>
                         <div class="poster__photo-frame" id="p-photo-frame">
                           <img id="p-photo" alt="" hidden draggable="false">
                           <div class="poster__photo-empty preview-only" id="p-photo-empty">
@@ -298,24 +318,66 @@
                             <span>Ảnh chân dung</span>
                           </div>
                         </div>
-                        <svg class="poster__spark poster__spark--a" viewBox="191.6 7.6 21.9 21.3" aria-hidden="true"><path d="m206.86,14.07c-2.4-2.7-4.31-6.43-4.31-6.43,0,0-1.470,3.540-4.020,6.260-2.830,3.020-6.870,4.630-6.870,4.630,0,0,4.040,1.610,6.870,4.630,2.550,2.720,4.020,6.260,4.020,6.260,0,0,1.910-3.730,4.310-6.430,2.780-3.120,6.580-4.460,6.580-4.460,0,0-3.800-1.330-6.580-4.460Z"/></svg>
-                        <svg class="poster__spark poster__spark--b" viewBox="191.6 7.6 21.9 21.3" aria-hidden="true"><path d="m206.86,14.07c-2.4-2.7-4.31-6.43-4.31-6.43,0,0-1.470,3.540-4.020,6.260-2.830,3.020-6.870,4.630-6.870,4.630,0,0,4.040,1.610,6.870,4.630,2.550,2.720,4.020,6.260,4.020,6.260,0,0,1.910-3.730,4.310-6.430,2.780-3.120,6.580-4.460,6.580-4.460,0,0-3.800-1.330-6.580-4.460Z"/></svg>
-                        <svg class="poster__spark poster__spark--c" viewBox="191.6 7.6 21.9 21.3" aria-hidden="true"><path d="m206.86,14.07c-2.4-2.7-4.31-6.43-4.31-6.43,0,0-1.470,3.540-4.020,6.260-2.830,3.020-6.870,4.630-6.870,4.630,0,0,4.040,1.610,6.870,4.630,2.550,2.720,4.020,6.260,4.020,6.260,0,0,1.910-3.730,4.310-6.430,2.780-3.120,6.580-4.460,6.580-4.460,0,0-3.800-1.330-6.580-4.460Z"/></svg>
                       </figure>
+
+                      <div class="poster__details">
+                        <div class="poster__detail-row poster__detail-row--name">
+                          <span class="detail-label" id="p-row-salute">Anh / <em lang="en">Mr.</em></span>
+                          <span class="detail-value detail-value--highlight" id="p-row-name"></span>
+                        </div>
+                        <div class="poster__detail-row">
+                          <span class="detail-label">Chức vụ / <em lang="en">Position</em></span>
+                          <span class="detail-value" id="p-role"></span>
+                        </div>
+                        <div class="poster__detail-row">
+                          <span class="detail-label">Phòng ban / <em lang="en">Department</em></span>
+                          <span class="detail-value" id="p-dept"></span>
+                        </div>
+                        <div class="poster__detail-row">
+                          <span class="detail-label">Ngày nhận việc / <em lang="en">Start Date</em></span>
+                          <span class="detail-value" id="p-start"></span>
+                        </div>
+                        <div class="poster__detail-row">
+                          <span class="detail-label">ĐTDD / <em lang="en">Mobile</em></span>
+                          <span class="detail-value" id="p-phone"></span>
+                        </div>
+                        <div class="poster__detail-row">
+                          <span class="detail-label">Số nội bộ / <em lang="en">Ext</em></span>
+                          <span class="detail-value" id="p-ext"></span>
+                        </div>
+                        <div class="poster__detail-row">
+                          <span class="detail-label">Email</span>
+                          <span class="detail-value" id="p-email"></span>
+                        </div>
+                        <div class="poster__detail-row">
+                          <span class="detail-label">QL trực tiếp / <em lang="en">Direct Manager</em></span>
+                          <span class="detail-value" id="p-manager"></span>
+                        </div>
+                      </div>
                     </section>
 
-                    <dl class="poster__facts">
-                      <div class="fact"><dt>Quản lý trực tiếp <em lang="en">/ Direct Manager</em></dt><dd id="p-manager"></dd></div>
-                      <div class="fact"><dt>Phòng ban <em lang="en">/ Department</em></dt><dd id="p-dept"></dd></div>
-                      <div class="fact"><dt>Liên hệ <em lang="en">/ Contact</em></dt><dd id="p-contact"></dd></div>
-                      <div class="fact"><dt>Ngày nhận việc <em lang="en">/ Start Date</em></dt><dd id="p-start"></dd></div>
-                    </dl>
+                    <section class="poster__welcome-block">
+                      <div class="poster__welcome" id="p-welcome"></div>
 
-                    <footer class="poster__foot">
-                      <p class="poster__msg-vi" id="p-msg-vi"></p>
-                      <p class="poster__msg-en" id="p-msg-en" lang="en"></p>
-                      <p class="poster__site" id="p-site"></p>
-                    </footer>
+                      <p class="poster__welcome-salute">
+                        <span class="salute-prefix" id="p-salute">Anh / <em lang="en">Mr.</em></span>
+                        <strong class="salute-name" id="p-name"></strong>
+                      </p>
+
+                      <p class="poster__welcome-join">
+                        gia nhập / <em lang="en">to</em> <strong id="p-join-company"></strong>
+                      </p>
+
+                      <div class="poster__wishes">
+                        <p class="poster__wish-vi" id="p-msg-vi"></p>
+                        <p class="poster__wish-en" id="p-msg-en" lang="en"></p>
+                        <p class="poster__wish-org" id="p-wish-company"></p>
+                      </div>
+                    </section>
+                  </div>
+
+                  <div class="poster__site-bar">
+                    <span id="p-site"></span>
                   </div>
                 </article>
 
@@ -339,6 +401,6 @@
   <script src="vendor/html-to-image.js"></script>
   <script src="vendor/gsap.min.js"></script>
   <script src="js/config.js?v=3.0"></script>
-  <script type="module" src="js/app.js?v=3.0"></script>
+  <script type="module" src="js/app.js?v=3.4"></script>
 </body>
 </html>

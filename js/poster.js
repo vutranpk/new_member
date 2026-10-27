@@ -43,17 +43,15 @@ export function pronouns(salutation) {
 
 export function defaultMessages(salutation, company) {
   const p = pronouns(salutation);
-  const legal = company.legalName;
-  const end = /[.!?]$/.test(legal) ? '' : '.';
   return {
     vi: salutation
-      ? `Chào mừng ${p.vi} gia nhập ${legal}${end} Chúc ${p.vi} sớm hòa nhập, phát triển<br>và gặt hái nhiều thành công trên cương vị mới!`
-      : `Chào mừng anh/chị gia nhập ${legal}${end} Chúc anh/chị sớm hòa nhập, phát triển<br>và gặt hái nhiều thành công trên cương vị mới!`,
+      ? `Chúc ${p.vi} sớm hòa nhập phát triển & thành công tại`
+      : `Chúc anh/chị sớm hòa nhập phát triển & thành công tại`,
     en: salutation === 'ms'
-      ? `Welcome to ${legal}! We wish her a smooth transition, continued growth, and great<br>success in her new role.`
+      ? `We wish her a smooth transition, continued growth & great success at`
       : (salutation === 'mr'
-        ? `Welcome to ${legal}! We wish him a smooth transition, continued growth, and great<br>success in his new role.`
-        : `Welcome to ${legal}! We wish you a smooth transition, continued growth, and great<br>success in your new role.`),
+        ? `We wish him a smooth transition, continued growth & great success at`
+        : `We wish you a smooth transition, continued growth & great success at`),
   };
 }
 
@@ -67,86 +65,59 @@ export function renderPoster(state, company) {
   const p = pronouns(state.salutation);
 
   const viAnnounce = company.announceVi || cfg.DEFAULT_ANNOUNCE_VI;
-  $('p-announce-vi').innerHTML = formatHtmlBreaks(viAnnounce);
+  if ($('p-announce-vi')) $('p-announce-vi').innerHTML = formatHtmlBreaks(viAnnounce);
   const enAnnounce = company.announceEn || cfg.DEFAULT_ANNOUNCE_EN;
-  $('p-announce-en').innerHTML = formatHtmlBreaks(enAnnounce);
-  $('p-salute').innerHTML = state.salutation ? escapeHtml(p.salute) : ph('Danh xưng');
+  if ($('p-announce-en')) $('p-announce-en').innerHTML = formatHtmlBreaks(enAnnounce);
 
-  $('p-name').innerHTML = state.name ? escapeHtml(state.name) : ph('Họ và tên');
-  $('p-title-vi').innerHTML = state.titleVi ? escapeHtml(state.titleVi) : ph('Chức danh');
-  $('p-title-en').textContent = state.titleEn || '';
+  // Dòng 1 bảng thông tin: Danh xưng & Họ tên
+  const saluteHtml = state.salutation ? (state.salutation === 'ms' ? 'Chị / <em lang="en">Ms.</em>' : 'Anh / <em lang="en">Mr.</em>') : 'Anh/Chị / <em lang="en">Mr./Ms.</em>';
+  if ($('p-row-salute')) $('p-row-salute').innerHTML = saluteHtml;
+  if ($('p-row-name')) $('p-row-name').innerHTML = state.name ? escapeHtml(state.name) : ph('Họ và tên');
 
-  $('p-manager').innerHTML = state.manager ? escapeHtml(state.manager) : ph('Quản lý trực tiếp');
-  $('p-dept').innerHTML = state.dept ? escapeHtml(state.dept) : ph('Phòng ban');
-  $('p-start').innerHTML = state.start ? formatDate(state.start) : ph('dd.mm.yyyy');
+  // Dòng 2: Chức vụ
+  const roleParts = [state.titleVi ? escapeHtml(state.titleVi) : '', state.titleEn ? `<em lang="en">${escapeHtml(state.titleEn)}</em>` : ''].filter(Boolean);
+  if ($('p-role')) $('p-role').innerHTML = roleParts.length ? roleParts.join(' / ') : ph('Chức vụ / Position');
 
-  const phone = formatPhone(state.phone);
-  const parts = [];
-  if (phone || state.ext) {
-    parts.push([escapeHtml(phone), state.ext ? `(Ext: ${escapeHtml(state.ext)})` : ''].filter(Boolean).join(' '));
-  }
-  if (state.email) parts.push(escapeHtml(state.email));
-  $('p-contact').innerHTML = parts.length ? parts.join('<br>') : ph('Điện thoại / Email');
+  // Dòng 3: Phòng ban
+  if ($('p-dept')) $('p-dept').innerHTML = state.dept ? escapeHtml(state.dept) : ph('Phòng ban / Department');
 
+  // Dòng 4: Ngày nhận việc
+  if ($('p-start')) $('p-start').innerHTML = state.start ? formatDate(state.start) : ph('dd.mm.yyyy');
+
+  // Dòng 5: ĐTDD
+  if ($('p-phone')) $('p-phone').innerHTML = state.phone ? formatPhone(state.phone) : ph('09xx xxx xxx');
+
+  // Dòng 6: Số nội bộ
+  if ($('p-ext')) $('p-ext').innerHTML = state.ext ? escapeHtml(state.ext) : ph('---');
+
+  // Dòng 7: Email
+  if ($('p-email')) $('p-email').innerHTML = state.email ? escapeHtml(state.email) : ph('email@congty.vn');
+
+  // Dòng 8: Quản lý trực tiếp
+  if ($('p-manager')) $('p-manager').innerHTML = state.manager ? escapeHtml(state.manager) : ph('Tổng Giám Đốc / President');
+
+  // Khối Welcome phía dưới
+  if ($('p-salute')) $('p-salute').innerHTML = saluteHtml;
+  if ($('p-name')) $('p-name').innerHTML = state.name ? escapeHtml(state.name) : ph('Họ và tên');
+  if ($('p-join-company')) $('p-join-company').textContent = company.legalName || 'PHUC SINH CONSUMER CORP';
+
+  // Lời chúc
   const msg = state.autoMsg ? defaultMessages(state.salutation, company) : { vi: state.msgVi, en: state.msgEn };
-  const rawVi = msg.vi || '';
-  const escapedVi = rawVi.includes('<br>') ? rawVi : escapeHtml(rawVi);
-  $('p-msg-vi').innerHTML = emphasize(escapedVi, escapeHtml(company.legalName));
-  const rawEn = msg.en || '';
-  $('p-msg-en').innerHTML = rawEn.includes('<br>') ? rawEn : escapeHtml(rawEn);
+  if ($('p-msg-vi')) $('p-msg-vi').innerHTML = formatHtmlBreaks(msg.vi || '');
+  if ($('p-msg-en')) $('p-msg-en').innerHTML = formatHtmlBreaks(msg.en || '');
+  if ($('p-wish-company')) $('p-wish-company').textContent = company.legalName || 'PHUC SINH CONSUMER CORP';
 
-  $('p-site').innerHTML = formatHtmlBreaks(company.footer || '');
-}
-
-/** In đậm tên công ty trong lời chúc tiếng Việt */
-function emphasize(html, legal) {
-  if (!legal || !html.includes(legal)) return html;
-  return html.split(legal).join(`<strong>${legal}</strong>`);
+  // Chân trang
+  if ($('p-site')) $('p-site').textContent = company.footer || 'WWW.KCOFFEE.VN / K COFFEE APP';
 }
 
 /* ---------------------------------------------------------------------------
-   Xử lý tên: Tên từ 4 từ trở lên tự động xuống 2 dòng cân đối.
-   Tên 2–3 từ giữ trên 1 dòng (dùng Semi Condensed hoặc co nhẹ nếu tràn).
+   Xử lý tên: giữ kích thước và định dạng đẹp mắt
 --------------------------------------------------------------------------- */
-const NAME_BASE = 33;
-const NAME_MIN = 24;
-
 export function fitName() {
   const el = $('p-name');
-  const text = (el.querySelector('.is-placeholder') ? '' : el.textContent).trim();
-  const words = text ? text.split(/\s+/).filter(Boolean) : [];
-  const avail = el.parentElement.clientWidth - 20; // trừ 20px padding-left
-
-  el.classList.remove('is-semi', 'is-wrap');
-  el.style.fontSize = `${NAME_BASE}px`;
-
-  if (!text) return { mode: 'normal', size: NAME_BASE };
-
-  // Quy tắc thông minh: Tên từ 4 chữ trở lên tự động xuống 2 dòng cân đối đẹp mắt
-  if (words.length >= 4) {
-    el.style.fontSize = '28px';
-    el.classList.add('is-wrap');
-    return { mode: 'wrap', size: 28 };
-  }
-
-  // Tên 2–3 chữ: Ưu tiên nằm trọn vẹn trên 1 dòng
-  if (el.scrollWidth <= avail) return { mode: 'normal', size: NAME_BASE };
-
-  // Nếu hơi dài thì đổi sang Barlow Semi Condensed
-  el.classList.add('is-semi');
-  if (el.scrollWidth <= avail) return { mode: 'semi', size: NAME_BASE };
-
-  // Nếu vẫn tràn thì giảm cỡ chữ
-  const size = Math.floor(NAME_BASE * (avail / el.scrollWidth) * 10) / 10;
-  if (size >= NAME_MIN) {
-    el.style.fontSize = `${size}px`;
-    return { mode: 'shrink', size };
-  }
-
-  // Quá dài thì xuống dòng
-  el.style.fontSize = '28px';
-  el.classList.add('is-wrap');
-  return { mode: 'wrap', size: 28 };
+  if (!el) return { mode: 'normal', size: 24 };
+  return { mode: 'normal', size: 24 };
 }
 
 /* ---------------------------------------------------------------------------
