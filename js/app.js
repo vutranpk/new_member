@@ -184,10 +184,11 @@ function previewCompany(c) {
   if ($('mock-announce-vi')) $('mock-announce-vi').innerHTML = formatHtmlBreaks(c.announceVi || cfg.DEFAULT_ANNOUNCE_VI);
   if ($('mock-announce-en')) $('mock-announce-en').innerHTML = formatHtmlBreaks(c.announceEn || cfg.DEFAULT_ANNOUNCE_EN);
   if ($('mock-site')) $('mock-site').innerHTML = formatHtmlBreaks(c.footer || '');
-  if ($('mock-msg-vi') && c.legalName) {
-    $('mock-msg-vi').innerHTML = `Chào mừng anh gia nhập <strong>${escapeHtml(c.legalName)}</strong>. Chúc anh sớm hòa nhập, phát triển và gặt hái nhiều thành công trên cương vị mới!`;
-    if ($('mock-msg-en')) $('mock-msg-en').textContent = `Welcome to ${c.legalName}! We wish him a smooth transition, continued growth, and great success in his new role.`;
-  }
+  const legal = c.legalName || 'PHUC SINH CONSUMER CORP';
+  if ($('mock-join-company')) $('mock-join-company').textContent = legal;
+  if ($('mock-msg-vi')) $('mock-msg-vi').textContent = 'Chúc anh sớm hòa nhập phát triển & thành công tại';
+  if ($('mock-msg-en')) $('mock-msg-en').textContent = 'We wish him a smooth transition, continued growth & great success at';
+  if ($('mock-wish-org')) $('mock-wish-org').textContent = legal;
   $('mock-name').textContent = c.name;
   document.querySelectorAll('.company-row').forEach((r) => r.classList.toggle('is-active', r.dataset.id === c.id));
   motion.animateCompanyPreview();

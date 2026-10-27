@@ -29,7 +29,7 @@
    - Kéo-thả ảnh từ máy tính hoặc thả trực tiếp lên khung ảnh trên poster.
    - Thanh trượt zoom (100% – 300%) và dùng chuột kéo di chuyển khuôn mặt vào đúng tâm góc vát chéo.
 4. **Thông minh hóa nội dung (Smart Copy):**
-   - Chọn `Anh / Mr.` $\rightarrow$ Tự động điền câu chúc: *"Chào mừng anh gia nhập... We wish him..."*
+   - Chọn `Anh / Mr.` $\rightarrow$ Tự động điền câu chúc: *"Chúc anh sớm hòa nhập phát triển & thành công tại... We wish him..."*
    - Chọn `Chị / Ms.` $\rightarrow$ Tự động đổi sang *"chị"* và *"her"*.
    - Rời ô email sẽ tự ghép đuôi `@domain` của công ty đang chọn.
    - Rời ô số điện thoại tự định dạng nhóm số Việt Nam `09xx xxx xxx`.
